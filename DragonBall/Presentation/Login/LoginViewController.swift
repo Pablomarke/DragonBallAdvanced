@@ -11,6 +11,7 @@ protocol LoginViewControllerDelegate {
     var viewState: ((LoginViewState) -> Void)? { get set}
     func onloginPressed(email: String?, password: String?)
 }
+
 // Mark: - View State -
 enum LoginViewState {
     case loading (_ isLoading: Bool)
@@ -88,6 +89,7 @@ class LoginViewController: UIViewController {
                     case .navigateToNext:
                         self?.activityView.isHidden = true
                         // TODO: Navegar a la vista
+                        break
                 }
             }
         }
@@ -104,7 +106,6 @@ extension LoginViewController: UITextFieldDelegate {
                 passwordFieldError.isHidden = true
                 
             default: break
-                
         }
         /*
          if emailField == textField {
