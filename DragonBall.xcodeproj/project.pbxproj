@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		39DC250D2AD71A61005416C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC250C2AD71A61005416C0 /* AppDelegate.swift */; };
 		39DC250F2AD71A61005416C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC250E2AD71A61005416C0 /* SceneDelegate.swift */; };
-		39DC25112AD71A61005416C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25102AD71A61005416C0 /* ViewController.swift */; };
+		39DC25112AD71A61005416C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25102AD71A61005416C0 /* LoginViewController.swift */; };
 		39DC25142AD71A61005416C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39DC25122AD71A61005416C0 /* Main.storyboard */; };
 		39DC25172AD71A61005416C0 /* DragonBall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25152AD71A61005416C0 /* DragonBall.xcdatamodeld */; };
 		39DC25192AD71A63005416C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39DC25182AD71A63005416C0 /* Assets.xcassets */; };
@@ -17,6 +17,7 @@
 		39DC25272AD71A64005416C0 /* DragonBallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25262AD71A64005416C0 /* DragonBallTests.swift */; };
 		39DC25312AD71A64005416C0 /* DragonBallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25302AD71A64005416C0 /* DragonBallUITests.swift */; };
 		39DC25332AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25322AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift */; };
+		39DC25472AD725F7005416C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25462AD725F7005416C0 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,7 @@
 		39DC25092AD71A61005416C0 /* DragonBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DC250C2AD71A61005416C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39DC250E2AD71A61005416C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		39DC25102AD71A61005416C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		39DC25102AD71A61005416C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		39DC25132AD71A61005416C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39DC25162AD71A61005416C0 /* DragonBall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DragonBall.xcdatamodel; sourceTree = "<group>"; };
 		39DC25182AD71A63005416C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		39DC252C2AD71A64005416C0 /* DragonBallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonBallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DC25302AD71A64005416C0 /* DragonBallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallUITests.swift; sourceTree = "<group>"; };
 		39DC25322AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		39DC25462AD725F7005416C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +103,12 @@
 		39DC250B2AD71A61005416C0 /* DragonBall */ = {
 			isa = PBXGroup;
 			children = (
-				39DC250C2AD71A61005416C0 /* AppDelegate.swift */,
 				39DC250E2AD71A61005416C0 /* SceneDelegate.swift */,
-				39DC25102AD71A61005416C0 /* ViewController.swift */,
-				39DC25122AD71A61005416C0 /* Main.storyboard */,
-				39DC25182AD71A63005416C0 /* Assets.xcassets */,
-				39DC251A2AD71A63005416C0 /* LaunchScreen.storyboard */,
+				39DC250C2AD71A61005416C0 /* AppDelegate.swift */,
+				39DC25402AD71AB7005416C0 /* Resources */,
 				39DC251D2AD71A63005416C0 /* Info.plist */,
-				39DC25152AD71A61005416C0 /* DragonBall.xcdatamodeld */,
+				39DC25412AD71AC3005416C0 /* Data */,
+				39DC253F2AD71A9D005416C0 /* Presentation */,
 			);
 			path = DragonBall;
 			sourceTree = "<group>";
@@ -128,6 +128,65 @@
 				39DC25322AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift */,
 			);
 			path = DragonBallUITests;
+			sourceTree = "<group>";
+		};
+		39DC253F2AD71A9D005416C0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				39DC25122AD71A61005416C0 /* Main.storyboard */,
+				39DC25452AD71CA3005416C0 /* Login */,
+				39DC25442AD71C97005416C0 /* Launch */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		39DC25402AD71AB7005416C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				39DC25182AD71A63005416C0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		39DC25412AD71AC3005416C0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				39DC25432AD71B50005416C0 /* Api */,
+				39DC25422AD71B4A005416C0 /* Local */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		39DC25422AD71B4A005416C0 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				39DC25152AD71A61005416C0 /* DragonBall.xcdatamodeld */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		39DC25432AD71B50005416C0 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		39DC25442AD71C97005416C0 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				39DC251A2AD71A63005416C0 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		39DC25452AD71CA3005416C0 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				39DC25102AD71A61005416C0 /* LoginViewController.swift */,
+				39DC25462AD725F7005416C0 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39DC25112AD71A61005416C0 /* ViewController.swift in Sources */,
+				39DC25112AD71A61005416C0 /* LoginViewController.swift in Sources */,
 				39DC25172AD71A61005416C0 /* DragonBall.xcdatamodeld in Sources */,
 				39DC250D2AD71A61005416C0 /* AppDelegate.swift in Sources */,
+				39DC25472AD725F7005416C0 /* LoginViewModel.swift in Sources */,
 				39DC250F2AD71A61005416C0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,7 +510,6 @@
 				INFOPLIST_FILE = DragonBall/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -477,7 +536,6 @@
 				INFOPLIST_FILE = DragonBall/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
