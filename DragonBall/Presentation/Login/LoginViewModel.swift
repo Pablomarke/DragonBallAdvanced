@@ -21,7 +21,7 @@ class LoginViewModel: LoginViewControllerDelegate {
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(onLoginSuccres),
+            selector: #selector(onLoginResponse),
             name: NotificationCenter.apiLoginNotification,
             object: nil)
         
@@ -55,19 +55,17 @@ class LoginViewModel: LoginViewControllerDelegate {
         }
     }
     
-    @objc func onLoginSuccres (_ notification: Notification) {
-        // TODO: parsear resultado que vendrá en notification.userInfo
-        print("LoginViewModel onLoginResponse: \(notification)")
+    @objc func onLoginResponse (_ notification: Notification) {
+        defer { viewState?(.loading(false))}
         
+        // TODO: parsear resultado que vendrá en notification.userInfo
         guard let token = notification.userInfo?[NotificationCenter.tokenKey] as? String,
         !token.isEmpty else {
             return
         }
         
         secureDataProvider.save(token: token)
-        viewState?(.loading(false))
         viewState?(.navigateToNext)
-        
         
     }
     
