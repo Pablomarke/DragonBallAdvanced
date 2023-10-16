@@ -15,16 +15,20 @@ class LoginViewModel: LoginViewControllerDelegate {
     var viewState: ((LoginViewState) -> Void)?
     
     // MARK: - Init -
-    init(apiProvider: ApiProviderProtocol, secureDataProvider: SecureDataProviderProtocol) {
+    init(
+        apiProvider: ApiProviderProtocol,
+        secureDataProvider: SecureDataProviderProtocol
+    ) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
         
+        //Esto se hace así para usarlo de ejemplo de observer
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onLoginResponse),
             name: NotificationCenter.apiLoginNotification,
-            object: nil)
-        
+            object: nil
+        )
     }
     
     deinit {
@@ -56,7 +60,7 @@ class LoginViewModel: LoginViewControllerDelegate {
     }
     
     @objc func onLoginResponse (_ notification: Notification) {
-        defer { viewState?(.loading(false))}
+        defer { viewState?(.loading(false)) }
         
         // TODO: parsear resultado que vendrá en notification.userInfo
         guard let token = notification.userInfo?[NotificationCenter.tokenKey] as? String,
@@ -66,7 +70,6 @@ class LoginViewModel: LoginViewControllerDelegate {
         
         secureDataProvider.save(token: token)
         viewState?(.navigateToNext)
-        
     }
     
     private func isValid(email: String?) -> Bool {

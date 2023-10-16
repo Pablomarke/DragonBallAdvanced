@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        
         let rootViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
         rootViewController?.viewModel = LoginViewModel(
             apiProvider: ApiProvider(), 

@@ -44,12 +44,14 @@ class LoginViewController: UIViewController {
         case email = 0
         case password
     }
+    
     // Mark: - lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
         setObservers()
     }
+    
     // MARK: - Private Functions -
     private func initViews() {
         emailField.delegate = self
@@ -66,13 +68,13 @@ class LoginViewController: UIViewController {
     }
     
     @objc func dismissKeyboard(){
+        // Ocultar el teclado al pulsar en cualquier punto de la vista
         view.endEditing(true)
     }
     
     private func setObservers() {
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {
-                
                 switch state {
                     case .loading(let isLoading):
                         self?.activityView.isHidden = !isLoading
@@ -108,6 +110,8 @@ extension LoginViewController: UITextFieldDelegate {
             default: break
         }
         /*
+         Forma anterior de hacerlo
+         
          if emailField == textField {
          emailFieldError.isHidden = true
          } else if passwordField == textField {
