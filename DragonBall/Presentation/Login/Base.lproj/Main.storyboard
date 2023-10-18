@@ -104,11 +104,22 @@
                         <outlet property="emailFieldError" destination="kRk-AC-ee7" id="8ll-LG-9D2"/>
                         <outlet property="passwordField" destination="ptL-ju-w0D" id="hCS-Gh-KPS"/>
                         <outlet property="passwordFieldError" destination="Wfq-7N-8fU" id="VX1-d6-jTv"/>
+                        <segue destination="c9x-Vf-0vw" kind="show" identifier="LOGIN_TO_HERO" id="rsh-u4-LI2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Heroes-->
+        <scene sceneID="nTS-Y4-sjt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Heroes" id="c9x-Vf-0vw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="FB5-Tf-Qvf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpX-qu-ERs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="998" y="18"/>
         </scene>
     </scenes>
     <resources>

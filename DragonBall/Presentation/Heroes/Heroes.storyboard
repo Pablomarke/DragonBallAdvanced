@@ -81,6 +81,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="containerView" destination="MzQ-P5-ad3" id="Bhh-Y8-zBl"/>
                                             <outlet property="heroDescription" destination="5ub-lv-3tK" id="Lwc-3U-NHe"/>
                                             <outlet property="name" destination="uhq-FE-sct" id="EIi-Ir-8i4"/>
                                             <outlet property="photo" destination="H5Y-Lj-5am" id="Ga0-Y2-HIb"/>

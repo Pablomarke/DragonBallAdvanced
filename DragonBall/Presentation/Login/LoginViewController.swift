@@ -9,6 +9,7 @@ import UIKit
 
 protocol LoginViewControllerDelegate {
     var viewState: ((LoginViewState) -> Void)? { get set}
+    var heroesViewModel: HeroesViewControllerDelegate { get }
     func onloginPressed(email: String?, password: String?)
 }
 
@@ -52,6 +53,15 @@ class LoginViewController: UIViewController {
         setObservers()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "LOGIN_TO_HEROES",
+              let heroesViewController = segue.destination as? HeroesViewController else {
+            return
+        }
+
+        heroesViewController.viewModel = viewModel?.heroesViewModel
+    }
+
     // MARK: - Private Functions -
     private func initViews() {
         emailField.delegate = self
@@ -89,9 +99,8 @@ class LoginViewController: UIViewController {
                         self?.passwordFieldError.isHidden = (error == nil || error?.isEmpty == true)
                         
                     case .navigateToNext:
-                        self?.activityView.isHidden = true
-                        // TODO: Navegar a la vista
-                        break
+                        self?.performSegue(withIdentifier: "LOGIN_TO_HERO",
+                                           sender: nil)
                 }
             }
         }

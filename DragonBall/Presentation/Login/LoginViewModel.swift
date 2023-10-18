@@ -8,11 +8,15 @@
 import Foundation
 
 class LoginViewModel: LoginViewControllerDelegate {
+    // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
     
     // MARK: - Properties -
     var viewState: ((LoginViewState) -> Void)?
+    var heroesViewModel: HeroesViewControllerDelegate {
+        HeroesViewModel(apiProvider: apiProvider, secureDataProvider: secureDataProvider)
+    }
     
     // MARK: - Init -
     init(
@@ -73,7 +77,7 @@ class LoginViewModel: LoginViewControllerDelegate {
     }
     
     private func isValid(email: String?) -> Bool {
-        email?.isEmpty == false && email?.contains("@") ?? false
+        email?.isEmpty == false && (email?.contains("@") ?? false)
     }
     
     private func isValid(password: String?) -> Bool {
