@@ -5,13 +5,18 @@
 //  Created by Pablo Márquez Marín on 16/10/23.
 //
 
-import Foundation
 import CoreData
+import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
+    private var moc: NSManagedObjectContext? {
+        (
+            CoreDataStack.shared.persistentContainer.viewContext
+        )
+    }
     
     // MARK: - Properties -
     var viewState: ((HeroesViewState) -> Void)?
@@ -40,12 +45,11 @@ class HeroesViewModel: HeroesViewControllerDelegate {
                 self.heroes = heroes
                
                 //TODO : coredata heroes
-                let moc = CoreDataStack.shared.persistentContainer.viewContext
-                let entityHero = NSEntityDescription.entity(forEntityName: HeroDAO.entityName, in: moc)
-                //var heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
-                
-               // moc.save()
                 self.viewState?(.updateData)
+                print("heroes: \(heroes.count)")
+               // self.createHero()
+               // self.countHeroes()
+                
             }
         }
     }
@@ -56,5 +60,30 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         } else {
             nil
         }
+    }
+    
+    func createHero() {
+        guard let moc,
+                let entityHero = NSEntityDescription.entity(
+                    forEntityName: HeroDAO.entityName,
+                    in: moc
+                ) else { return }
+        for hero in heroes {
+            var heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
+            heroDAO.setValue(hero.name, forKey:  "name")
+            heroDAO.setValue(hero.description, forKey: "heroDescription")
+            heroDAO.setValue(hero.photo, forKey: "photo" )
+            try? moc.save()
+        }
+    }
+    
+    func countHeroes() {
+        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
+        guard let moc,
+        let myHeroes = try? moc.fetch(fetchHero)
+        else {
+            return
+        }
+        print("Heroes en base de datos: \(myHeroes.count )")
     }
 }
