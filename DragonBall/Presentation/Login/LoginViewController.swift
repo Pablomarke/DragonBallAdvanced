@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
               let heroesViewController = segue.destination as? HeroesViewController else {
             return
         }
-
+        
         heroesViewController.viewModel = viewModel?.heroesViewModel
     }
 
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
                         self?.passwordFieldError.isHidden = (error == nil || error?.isEmpty == true)
                         
                     case .navigateToNext:
-                        self?.performSegue(withIdentifier: "LOGIN_TO_HERO",
+                        self?.performSegue(withIdentifier: "LOGIN_TO_HEROES",
                                            sender: nil)
                 }
             }
@@ -118,14 +118,5 @@ extension LoginViewController: UITextFieldDelegate {
                 
             default: break
         }
-        /*
-         Forma anterior de hacerlo
-         
-         if emailField == textField {
-         emailFieldError.isHidden = true
-         } else if passwordField == textField {
-         passwordFieldError.isHidden = true
-         }
-         */
     }
 }

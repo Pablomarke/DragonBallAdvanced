@@ -2,10 +2,11 @@
 //  HeroCellView.swift
 //  DragonBall
 //
-//  Created by Pablo Márquez Marín on 16/10/23.
+//  Created by Pablo Márquez Marín on 18/10/23.
 //
 
 import UIKit
+import Kingfisher
 
 class HeroCellView: UITableViewCell {
     static let identifier: String = "HeroCellView"
@@ -33,6 +34,9 @@ class HeroCellView: UITableViewCell {
         containerView.layer.shadowRadius = 8
         containerView.layer.shadowOpacity = 0.6
         
+        photo.layer.cornerRadius = 8
+        photo.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        
         selectionStyle = .none
     }
     
@@ -43,7 +47,6 @@ class HeroCellView: UITableViewCell {
     ) {
         self.name.text = name
         self.heroDescription.text = description
-        
-        //TODO: imagen
+        self.photo.kf.setImage(with: URL(string: photo ?? ""))
     }
 }

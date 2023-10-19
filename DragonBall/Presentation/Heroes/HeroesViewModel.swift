@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class HeroesViewModel: HeroesViewControllerDelegate {
     // MARK: - Dependencies -
@@ -29,14 +30,21 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     // MARK: - Public functions -
     func onViewappear() {
         viewState?(.loading(true))
-        
+
         DispatchQueue.global().async {
-            defer {self.viewState?(.loading(false))}
+            defer { self.viewState?(.loading(false)) }
             guard let token = self.secureDataProvider.get() else { return }
-            
+
             self.apiProvider.getHeroes(by: nil,
-                                       token: token) {  heroes in
+                                       token: token) { heroes in
                 self.heroes = heroes
+               
+                //TODO : coredata heroes
+                let moc = CoreDataStack.shared.persistentContainer.viewContext
+                let entityHero = NSEntityDescription.entity(forEntityName: HeroDAO.entityName, in: moc)
+                //var heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
+                
+               // moc.save()
                 self.viewState?(.updateData)
             }
         }

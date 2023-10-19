@@ -23,7 +23,7 @@ class ApiProvider: ApiProviderProtocol {
         static let login = "/auth/login"
         static let heroes = "/heros/all"
     }
-    
+    // MARK: - ApiProviderProtocol -
     func login(for user: String, with password: String) {
         guard let url = URL(string: "\(ApiProvider.apiBaseURL)\(Endpoint.login)") else {
             return

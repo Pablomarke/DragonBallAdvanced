@@ -104,7 +104,7 @@
                         <outlet property="emailFieldError" destination="kRk-AC-ee7" id="8ll-LG-9D2"/>
                         <outlet property="passwordField" destination="ptL-ju-w0D" id="hCS-Gh-KPS"/>
                         <outlet property="passwordFieldError" destination="Wfq-7N-8fU" id="VX1-d6-jTv"/>
-                        <segue destination="c9x-Vf-0vw" kind="show" identifier="LOGIN_TO_HERO" id="rsh-u4-LI2"/>
+                        <segue destination="c9x-Vf-0vw" kind="show" identifier="LOGIN_TO_HEROES" id="rsh-u4-LI2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

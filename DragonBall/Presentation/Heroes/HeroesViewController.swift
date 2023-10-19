@@ -10,6 +10,7 @@ import UIKit
 protocol HeroesViewControllerDelegate {
     var viewState: ((HeroesViewState) -> Void)? { get set}
     var heroesCount: Int {get}
+    
     func onViewappear()
     func heroBy(index: Int)  -> Hero?
 }
@@ -22,9 +23,12 @@ enum HeroesViewState {
 class HeroesViewController: UIViewController {
     // MARK: - IBOutlet -
     @IBOutlet var tableHeroes: UITableView!
+    @IBOutlet weak var loadingView: UIView!
     
+    // MARK: - Public Properties -
     var viewModel: HeroesViewControllerDelegate?
     
+    // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
@@ -32,11 +36,14 @@ class HeroesViewController: UIViewController {
         viewModel?.onViewappear()
     }
     
+    // MARK: - Private functions -
     private func initViews() {
         tableHeroes.delegate = self
         tableHeroes.dataSource = self
-        tableHeroes.register(UINib(nibName: HeroCellView.identifier, bundle: nil), forCellReuseIdentifier: HeroCellView.identifier)
-        
+        tableHeroes.register(
+            UINib(nibName: HeroCellView.identifier, bundle: nil),
+            forCellReuseIdentifier: HeroCellView.identifier
+        )
     }
     
     private func setObservers() {
@@ -44,8 +51,8 @@ class HeroesViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        //TODO loading
-                        break
+                        self?.loadingView.isHidden = !isLoading
+
                     case .updateData:
                         self?.tableHeroes.reloadData()
                 }
@@ -87,8 +94,8 @@ extension HeroesViewController: UITableViewDelegate,
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO : navegar al detalle de hero
-        
     }
 }
