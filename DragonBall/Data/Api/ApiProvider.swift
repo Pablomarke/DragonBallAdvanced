@@ -56,7 +56,6 @@ class ApiProvider: ApiProviderProtocol {
                 // TODO: Enviar notificación indicando response vacío
                 return
             }
-            
             NotificationCenter.default.post(
                 name: NotificationCenter.apiLoginNotification,
                 object: nil,

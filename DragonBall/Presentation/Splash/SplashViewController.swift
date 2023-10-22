@@ -11,7 +11,6 @@ protocol SplashViewControllerDelegate {
     var viewState: ((SplashViewState) -> Void)? { get set }
     var loginViewModel: LoginViewControllerDelegate { get set }
     var heroesViewModel: HeroesViewControllerDelegate { get set }
-   // func haveToken() -> Bool
     func onViewAppear()
 }
 
@@ -32,7 +31,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         setObservers()
         viewModel?.onViewAppear()
-        //initSplash()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,25 +61,13 @@ class SplashViewController: UIViewController {
                         self?.splashActivity.isHidden = !isLoading
                     case .navigateToLogin:
                         self?.performSegue(withIdentifier: "SPLASH_TO_LOGIN",
-                                          sender: nil)
+                                           sender: nil)
                     case .navigateToHeroes:
                         self?.performSegue(withIdentifier: "SPLASH_TO_HEROES",
-                                          sender: nil)
+                                           sender: nil)
                 }
             }
         }
     }
-    
-    /*
-    func initSplash() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        if self.viewModel?.haveToken() == true {
-                self.performSegue(withIdentifier: "SPLASH_TO_HEROES",
-                                  sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "SPLASH_TO_LOGIN",
-                                  sender: nil)
-            }
-        } */
-    }
+}
 

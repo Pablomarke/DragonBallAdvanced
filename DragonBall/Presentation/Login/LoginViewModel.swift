@@ -40,6 +40,7 @@ class LoginViewModel: LoginViewControllerDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        
     }
     
     // MARK: - Public functions -
@@ -68,7 +69,6 @@ class LoginViewModel: LoginViewControllerDelegate {
     
     @objc func onLoginResponse (_ notification: Notification) {
         defer { viewState?(.loading(false)) }
-        
         //parsear resultado que vendrá en notification.userInfo
         guard let token = notification.userInfo?[NotificationCenter.tokenKey] as? String,
         !token.isEmpty else {
@@ -77,6 +77,7 @@ class LoginViewModel: LoginViewControllerDelegate {
         
         secureDataProvider.save(token: token)
         viewState?(.navigateToNext)
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func isValid(email: String?) -> Bool {

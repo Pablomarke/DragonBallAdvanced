@@ -11,6 +11,7 @@ protocol HeroesViewControllerDelegate {
     var viewState: ((HeroesViewState) -> Void)? { get set}
     var heroesCount: Int {get}
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
+    func splashViewModel() -> SplashViewControllerDelegate?
     func onViewappear()
     func heroBy(index: Int)  -> Hero?
     func logout()
@@ -46,24 +47,38 @@ class HeroesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue,
                           sender: Any?) {
-        /*
-        guard segue.identifier == "HEROES_TO_MAPHEROES",
-              let mapHeroesController = segue.destination as? MapHeroesController else {
-            return
-        }*/
-        guard segue.identifier == "HEROES_TO_DETAIL",
-              let index = sender as? Int,
-              let heroDetailViewController = segue.destination as? HeroDetailViewController,
-              let detailViewModel = viewModel?.heroDetailViewModel(index: index) else {
-            return
+        switch segue.identifier {
+            case "HEROES_TO_DETAIL":
+                guard let index = sender as? Int,
+                      let heroDetailViewController = segue.destination as? HeroDetailViewController,
+                      let detailViewModel = viewModel?.heroDetailViewModel(index: index) else {
+                    return
+                }
+                heroDetailViewController.viewModel = detailViewModel
+                //TODO: sacar esta logica a una funcion o extension
+                let backItem = UIBarButtonItem()
+                backItem.title = "Heroes"
+                backItem.tintColor = .orange
+                navigationItem.backBarButtonItem = backItem
+                
+            case "HEROES_TO_MAPHEROES":
+                guard let mapHeroesController = segue.destination as? MapHeroesController else {
+                    return
+                }
+                
+            case "HEROES_TO_SPLASHVIEW":
+                viewModel?.logout()
+                guard let splashViewController = segue.destination as? SplashViewController,
+                      let splashViewModel = viewModel?.splashViewModel() else {
+                    return
+                }
+                splashViewController.viewModel = splashViewModel
+                
+            default:
+                break
         }
-        
-        heroDetailViewController.viewModel = detailViewModel
-        let backItem = UIBarButtonItem()
-        backItem.title = "Heroes"
-        backItem.tintColor = .orange
-        navigationItem.backBarButtonItem = backItem
     }
+        
     
     // MARK: - Private functions -
     private func initViews() {
@@ -88,9 +103,9 @@ class HeroesViewController: UIViewController {
             }
         }
     }
+    
     // MARK: - Button Actions -
     @IBAction func logoutAction(_ sender: Any) {
-        viewModel?.logout()
         self.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
                      sender: nil)
     }
@@ -99,7 +114,6 @@ class HeroesViewController: UIViewController {
         self.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",
                      sender: nil)
     }
-    
 }
 
 extension HeroesViewController: UITableViewDelegate, 

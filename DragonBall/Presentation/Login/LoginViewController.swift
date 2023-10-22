@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
               let heroesViewController = segue.destination as? HeroesViewController else {
             return
         }
-        
         heroesViewController.viewModel = viewModel?.heroesViewModel
     }
 

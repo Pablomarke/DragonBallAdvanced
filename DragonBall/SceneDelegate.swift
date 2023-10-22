@@ -18,14 +18,6 @@ class SceneDelegate: UIResponder,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        /*
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let rootViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
-        rootViewController?.viewModel = LoginViewModel(
-            apiProvider: ApiProvider(), 
-            secureDataProvider: SecureDataProvider()
-        )
-        */
        let splashStoryboard = UIStoryboard(name: "SplashView",
                                             bundle: .main)
         let rootViewController = splashStoryboard.instantiateViewController(withIdentifier: "SplashView") as?  SplashViewController

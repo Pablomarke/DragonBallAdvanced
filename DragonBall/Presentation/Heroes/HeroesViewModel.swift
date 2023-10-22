@@ -9,8 +9,7 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
-   
-    
+
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
@@ -42,14 +41,12 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         DispatchQueue.global().async {
             defer { self.viewState?(.loading(false)) }
             guard let token = self.secureDataProvider.get() else { return }
-
             self.apiProvider.getHeroes(by: nil,
                                        token: token) { heroes in
                 self.heroes = heroes
                
                 //TODO : coredata heroes
                 self.viewState?(.updateData)
-                
                // self.createHero()
               //  self.countHeroes()
                 
@@ -99,7 +96,9 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             secureDataProvider: secureDataProvider
         )
     }
-    
+    func splashViewModel() -> SplashViewControllerDelegate? {
+        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider)
+    }
     func logout() {
         secureDataProvider.delete()
     }
