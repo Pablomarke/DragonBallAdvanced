@@ -23,6 +23,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     var heroesCount: Int {
         heroes.count
     }
+    
     private var heroes: Heroes = []
     
     // MARK: - Initializers -
@@ -46,7 +47,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
                
                 //TODO : coredata heroes
                 self.viewState?(.updateData)
-                print("heroes: \(heroes.count)")
+                
                // self.createHero()
                // self.countHeroes()
                 
@@ -69,7 +70,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
                     in: moc
                 ) else { return }
         for hero in heroes {
-            var heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
+            let heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
             heroDAO.setValue(hero.name, forKey:  "name")
             heroDAO.setValue(hero.description, forKey: "heroDescription")
             heroDAO.setValue(hero.photo, forKey: "photo" )
@@ -85,5 +86,15 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             return
         }
         print("Heroes en base de datos: \(myHeroes.count )")
+    }
+    
+    func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?  {
+        guard let selectedHero = heroBy(index: index) else { return nil }
+    
+        return HeroDetailViewModel(
+            hero: selectedHero,
+            apiProvider: apiProvider,
+            secureDataProvider: secureDataProvider
+        )
     }
 }

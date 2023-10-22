@@ -15,6 +15,7 @@ extension NotificationCenter {
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String)
     func getHeroes(by name: String?, token: String, completion: ((Heroes) -> Void)?)
+    func getLocations(by heroId: String?, token: String, completion: ((HeroLocations) -> Void)? )
 }
 
 class ApiProvider: ApiProviderProtocol {
@@ -22,6 +23,7 @@ class ApiProvider: ApiProviderProtocol {
     private enum Endpoint {
         static let login = "/auth/login"
         static let heroes = "/heros/all"
+        static let heroLocations = "/heros/locations/"
     }
     // MARK: - ApiProviderProtocol -
     func login(for user: String, with password: String) {
@@ -99,6 +101,45 @@ class ApiProvider: ApiProviderProtocol {
             }
             
             completion?(heroes)
+        }.resume()
+    }
+    
+    func getLocations(by heroId: String?, token: String, completion: ((HeroLocations) -> Void)? ) {
+        guard let url = URL(string: "\(ApiProvider.apiBaseURL)\(Endpoint.heroLocations)") else {
+            return
+        }
+        
+        let jsonData: [String: Any] = ["id": heroId ?? ""]
+        let jsonParameters = try? JSONSerialization.data(withJSONObject: jsonData)
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json; charset=utf8",
+                            forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(token)",
+                            forHTTPHeaderField: "authorization")
+        urlRequest.httpBody = jsonParameters
+        
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard error  == nil else {
+                //TODO: Enviar notification indicando el error
+                completion?([])
+                return
+            }
+            
+            guard let data,
+                  (response as? HTTPURLResponse)?.statusCode == 200 else {
+                // TODO: enviar notificación indicando respose error
+                completion?([])
+                return
+            }
+            
+            guard let heroLocations = try? JSONDecoder().decode(HeroLocations.self, from: data) else {
+                completion?([])
+                return
+            }
+            
+            completion?(heroLocations)
         }.resume()
     }
 }

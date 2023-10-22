@@ -10,7 +10,7 @@ import UIKit
 protocol HeroesViewControllerDelegate {
     var viewState: ((HeroesViewState) -> Void)? { get set}
     var heroesCount: Int {get}
-    
+    func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
     func onViewappear()
     func heroBy(index: Int)  -> Hero?
 }
@@ -36,10 +36,21 @@ class HeroesViewController: UIViewController {
         viewModel?.onViewappear()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, 
+                          sender: Any?) {
+        guard segue.identifier == "HEROES_TO_DETAIL",
+              let index = sender as? Int,
+              let heroDetailViewController = segue.destination as? HeroDetailViewController,
+              let detailViewModel = viewModel?.heroDetailViewModel(index: index) else {
+            return
+        }
+        heroDetailViewController.viewModel = detailViewModel
+    }
+    
     // MARK: - Private functions -
     private func initViews() {
-        tableHeroes.delegate = self
         tableHeroes.dataSource = self
+        tableHeroes.delegate = self
         tableHeroes.register(
             UINib(nibName: HeroCellView.identifier, bundle: nil),
             forCellReuseIdentifier: HeroCellView.identifier
@@ -81,7 +92,8 @@ extension HeroesViewController: UITableViewDelegate,
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let cell = tableHeroes.dequeueReusableCell(withIdentifier: HeroCellView.identifier, for: indexPath) as? HeroCellView else {
+        guard let cell = tableHeroes.dequeueReusableCell(withIdentifier: HeroCellView.identifier, 
+                                                         for: indexPath) as? HeroCellView else {
             return UITableViewCell()
         }
         if let hero = viewModel?.heroBy(index: indexPath.row) {
@@ -91,11 +103,14 @@ extension HeroesViewController: UITableViewDelegate,
                 description: hero.description
             )
         }
-        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO : navegar al detalle de hero
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        self.performSegue(withIdentifier: "HEROES_TO_DETAIL",
+                     sender: indexPath.row)
     }
 }
