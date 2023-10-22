@@ -24,10 +24,10 @@
                                 </constraints>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pLh-Rc-fKL">
-                                <rect key="frame" x="269" y="320" width="108" height="108"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pLh-Rc-fKL">
+                                <rect key="frame" x="273" y="324" width="104" height="104"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="108" id="Tcd-Hb-YLI"/>
+                                    <constraint firstAttribute="height" constant="104" id="Tcd-Hb-YLI"/>
                                     <constraint firstAttribute="width" secondItem="pLh-Rc-fKL" secondAttribute="height" multiplier="1:1" id="k1H-im-yrB"/>
                                 </constraints>
                             </imageView>

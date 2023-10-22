@@ -29,7 +29,7 @@ class HeroCellView: UITableViewCell {
         super.awakeFromNib()
         
         containerView.layer.cornerRadius = 8
-        containerView.layer.shadowColor = UIColor.gray.cgColor
+        containerView.layer.shadowColor = UIColor.orange.cgColor
         containerView.layer.shadowOffset = .zero
         containerView.layer.shadowRadius = 8
         containerView.layer.shadowOpacity = 0.6

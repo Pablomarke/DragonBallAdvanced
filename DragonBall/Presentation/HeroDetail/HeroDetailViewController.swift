@@ -31,6 +31,7 @@ class HeroDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         initViews()
         setObservers()
         viewModel?.onViewAppear()

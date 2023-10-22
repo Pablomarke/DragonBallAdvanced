@@ -36,7 +36,13 @@ class HeroesViewController: UIViewController {
         viewModel?.onViewappear()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true,
+                                                     animated: animated)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue,
                           sender: Any?) {
         guard segue.identifier == "HEROES_TO_DETAIL",
               let index = sender as? Int,
