@@ -13,6 +13,7 @@ protocol HeroesViewControllerDelegate {
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
     func onViewappear()
     func heroBy(index: Int)  -> Hero?
+    func logout()
 }
 
 enum HeroesViewState {
@@ -24,6 +25,8 @@ class HeroesViewController: UIViewController {
     // MARK: - IBOutlet -
     @IBOutlet var tableHeroes: UITableView!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     
     // MARK: - Public Properties -
     var viewModel: HeroesViewControllerDelegate?
@@ -35,7 +38,6 @@ class HeroesViewController: UIViewController {
         setObservers()
         viewModel?.onViewappear()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true,
@@ -44,13 +46,23 @@ class HeroesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue,
                           sender: Any?) {
+        /*
+        guard segue.identifier == "HEROES_TO_MAPHEROES",
+              let mapHeroesController = segue.destination as? MapHeroesController else {
+            return
+        }*/
         guard segue.identifier == "HEROES_TO_DETAIL",
               let index = sender as? Int,
               let heroDetailViewController = segue.destination as? HeroDetailViewController,
               let detailViewModel = viewModel?.heroDetailViewModel(index: index) else {
             return
         }
+        
         heroDetailViewController.viewModel = detailViewModel
+        let backItem = UIBarButtonItem()
+        backItem.title = "Heroes"
+        backItem.tintColor = .orange
+        navigationItem.backBarButtonItem = backItem
     }
     
     // MARK: - Private functions -
@@ -76,6 +88,18 @@ class HeroesViewController: UIViewController {
             }
         }
     }
+    // MARK: - Button Actions -
+    @IBAction func logoutAction(_ sender: Any) {
+        viewModel?.logout()
+        self.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
+                     sender: nil)
+    }
+    
+    @IBAction func mapAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",
+                     sender: nil)
+    }
+    
 }
 
 extension HeroesViewController: UITableViewDelegate, 

@@ -9,6 +9,8 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
+   
+    
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
@@ -49,7 +51,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
                 self.viewState?(.updateData)
                 
                // self.createHero()
-               // self.countHeroes()
+              //  self.countHeroes()
                 
             }
         }
@@ -96,5 +98,9 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             apiProvider: apiProvider,
             secureDataProvider: secureDataProvider
         )
+    }
+    
+    func logout() {
+        secureDataProvider.delete()
     }
 }

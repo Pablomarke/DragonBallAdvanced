@@ -27,6 +27,9 @@
 		399EA9542ADA9BCB0045B16D /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 399EA9532ADA9BCB0045B16D /* KeychainSwift */; };
 		399EA9562ADA9CD70045B16D /* SecureDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EA9552ADA9CD70045B16D /* SecureDataProvider.swift */; };
 		399EA9582ADA9F960045B16D /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EA9572ADA9F960045B16D /* ApiProvider.swift */; };
+		39BC50042AE53D01004B218B /* MapHeroesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC50032AE53D01004B218B /* MapHeroesController.swift */; };
+		39BC50062AE53D26004B218B /* MapHeroesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC50052AE53D26004B218B /* MapHeroesViewModel.swift */; };
+		39BC50082AE53D3C004B218B /* MapHeroes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BC50072AE53D3C004B218B /* MapHeroes.storyboard */; };
 		39DC250D2AD71A61005416C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC250C2AD71A61005416C0 /* AppDelegate.swift */; };
 		39DC250F2AD71A61005416C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC250E2AD71A61005416C0 /* SceneDelegate.swift */; };
 		39DC25112AD71A61005416C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25102AD71A61005416C0 /* LoginViewController.swift */; };
@@ -76,6 +79,9 @@
 		3978BB722ADDD5650046C7B3 /* HeroesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesViewModel.swift; sourceTree = "<group>"; };
 		399EA9552ADA9CD70045B16D /* SecureDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProvider.swift; sourceTree = "<group>"; };
 		399EA9572ADA9F960045B16D /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		39BC50032AE53D01004B218B /* MapHeroesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeroesController.swift; sourceTree = "<group>"; };
+		39BC50052AE53D26004B218B /* MapHeroesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeroesViewModel.swift; sourceTree = "<group>"; };
+		39BC50072AE53D3C004B218B /* MapHeroes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapHeroes.storyboard; sourceTree = "<group>"; };
 		39DC25092AD71A61005416C0 /* DragonBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DC250C2AD71A61005416C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39DC250E2AD71A61005416C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +200,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		39BC50022AE53CD2004B218B /* MapHeroes */ = {
+			isa = PBXGroup;
+			children = (
+				39BC50072AE53D3C004B218B /* MapHeroes.storyboard */,
+				39BC50032AE53D01004B218B /* MapHeroesController.swift */,
+				39BC50052AE53D26004B218B /* MapHeroesViewModel.swift */,
+			);
+			path = MapHeroes;
+			sourceTree = "<group>";
+		};
 		39DC25002AD71A61005416C0 = {
 			isa = PBXGroup;
 			children = (
@@ -248,11 +264,12 @@
 		39DC253F2AD71A9D005416C0 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				395D5FCE2AE1264100C34F7C /* Splash */,
 				39DC25442AD71C97005416C0 /* Launch */,
+				395D5FCE2AE1264100C34F7C /* Splash */,
 				39DC25452AD71CA3005416C0 /* Login */,
 				3978BB6B2ADDD50B0046C7B3 /* Heroes */,
 				395D5FD52AE1BBFC00C34F7C /* HeroDetail */,
+				39BC50022AE53CD2004B218B /* MapHeroes */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -430,6 +447,7 @@
 				3978BB6F2ADDD5460046C7B3 /* Heroes.storyboard in Resources */,
 				395D5FD02AE1379600C34F7C /* SplashView.storyboard in Resources */,
 				39DC25142AD71A61005416C0 /* Main.storyboard in Resources */,
+				39BC50082AE53D3C004B218B /* MapHeroes.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,9 +477,11 @@
 				39DC25172AD71A61005416C0 /* DragonBall.xcdatamodeld in Sources */,
 				395D5FE02AE1CAFF00C34F7C /* HeroAnnotation.swift in Sources */,
 				3978BB712ADDD5550046C7B3 /* HeroesViewController.swift in Sources */,
+				39BC50062AE53D26004B218B /* MapHeroesViewModel.swift in Sources */,
 				395D5FC32ADF052100C34F7C /* CoreDataStack.swift in Sources */,
 				399EA9562ADA9CD70045B16D /* SecureDataProvider.swift in Sources */,
 				395D5FD22AE137AA00C34F7C /* SplashViewController.swift in Sources */,
+				39BC50042AE53D01004B218B /* MapHeroesController.swift in Sources */,
 				395D5FCC2AE0367500C34F7C /* HeroCellView.swift in Sources */,
 				3978BB732ADDD5650046C7B3 /* HeroesViewModel.swift in Sources */,
 				395D5FD92AE1BC2E00C34F7C /* HeroDetailViewController.swift in Sources */,

@@ -16,8 +16,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXH-4J-mnq">
+                                <rect key="frame" x="15.999999999999996" y="59" width="49.666666666666657" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="GuD-VB-fuu"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="power.circle" catalog="system">
+                                    <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="logoutAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="xRQ-o5-neU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIx-he-NEs">
+                                <rect key="frame" x="325.66666666666669" y="59" width="51.333333333333314" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="jCP-6e-d4H"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="map.fill" catalog="system">
+                                    <color key="baseForegroundColor" systemColor="systemOrangeColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="mapAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aZa-1E-kgT"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="256" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qpd-s8-Iui">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="91" width="393" height="761"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlP-B8-KSw">
@@ -39,23 +65,41 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qpd-s8-Iui" secondAttribute="trailing" id="MfY-cp-4W8"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="PxO-hS-Ll2"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qpd-s8-Iui" secondAttribute="bottom" id="Qei-nG-cUO"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FIx-he-NEs" secondAttribute="trailing" constant="16" id="QnG-uI-hRh"/>
+                            <constraint firstItem="ZXH-4J-mnq" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" id="SVu-Gn-1Qt"/>
+                            <constraint firstItem="qpd-s8-Iui" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="32" id="TRg-7Z-1nN"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Yan-bl-nar"/>
                             <constraint firstAttribute="bottom" secondItem="OlP-B8-KSw" secondAttribute="bottom" id="ahL-Vz-CxL"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="b4j-i7-W8b"/>
-                            <constraint firstItem="qpd-s8-Iui" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qek-gQ-9pu"/>
+                            <constraint firstItem="ZXH-4J-mnq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="lCW-zj-ktu"/>
+                            <constraint firstItem="FIx-he-NEs" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lOy-H1-cwo"/>
+                            <constraint firstAttribute="bottom" secondItem="qpd-s8-Iui" secondAttribute="bottom" id="o5a-KE-CLZ"/>
                             <constraint firstItem="qpd-s8-Iui" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yrI-hH-cfu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loadingView" destination="OlP-B8-KSw" id="psn-gV-hTK"/>
+                        <outlet property="logoutButton" destination="ZXH-4J-mnq" id="9VM-WO-rbl"/>
+                        <outlet property="mapButton" destination="FIx-he-NEs" id="sNJ-LT-bIL"/>
                         <outlet property="tableHeroes" destination="qpd-s8-Iui" id="gVa-6R-dXO"/>
                         <segue destination="OOx-Pf-X19" kind="show" identifier="HEROES_TO_DETAIL" id="fV4-g8-isQ"/>
+                        <segue destination="rEk-Q5-1MO" kind="show" identifier="HEROES_TO_SPLASHVIEW" id="pvM-Fe-z4b"/>
+                        <segue destination="Kfi-vc-bqw" kind="show" identifier="HEROES_TO_MAPHEROES" id="ax6-Oa-fu2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--MapHeroes-->
+        <scene sceneID="SDS-Ei-2XT">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MapHeroes" storyboardName="MapHeroes" id="Kfi-vc-bqw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zdn-Bt-6ez"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yU6-oe-gMg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="-181"/>
         </scene>
         <!--HeroDetail-->
         <scene sceneID="LPv-ts-xin">
@@ -67,10 +111,25 @@
             </objects>
             <point key="canvasLocation" x="1080" y="-65"/>
         </scene>
+        <!--SplashView-->
+        <scene sceneID="Z7s-9v-DdF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SplashView" id="rEk-Q5-1MO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="1UF-Yc-M01"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LgV-Xx-GBs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="851" y="41"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
+        <image name="power.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
