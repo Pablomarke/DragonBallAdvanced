@@ -39,7 +39,7 @@ class SplashViewModel: SplashViewControllerDelegate {
     func onViewAppear() {
         viewState?(.loading(true))
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)){
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2)){
             self.isLogged ? self.viewState?(.navigateToHeroes) : self.viewState?(.navigateToLogin)
         }
     }

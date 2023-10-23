@@ -20,6 +20,8 @@ protocol HeroesViewControllerDelegate {
 enum HeroesViewState {
     case loading (_ isLoading: Bool)
     case updateData
+    case navigateToMap
+    case logoutAndExit
 }
 
 class HeroesViewController: UIViewController {
@@ -55,7 +57,7 @@ class HeroesViewController: UIViewController {
                     return
                 }
                 heroDetailViewController.viewModel = detailViewModel
-                //TODO: sacar esta logica a una funcion o extension
+                // TODO: sacar esta logica a una funcion o extension
                 let backItem = UIBarButtonItem()
                 backItem.title = "Heroes"
                 backItem.tintColor = .orange
@@ -66,8 +68,8 @@ class HeroesViewController: UIViewController {
                     return
                 }
                 
+                
             case "HEROES_TO_SPLASHVIEW":
-                viewModel?.logout()
                 guard let splashViewController = segue.destination as? SplashViewController,
                       let splashViewModel = viewModel?.splashViewModel() else {
                     return
@@ -79,7 +81,6 @@ class HeroesViewController: UIViewController {
         }
     }
         
-    
     // MARK: - Private functions -
     private func initViews() {
         tableHeroes.dataSource = self
@@ -99,20 +100,26 @@ class HeroesViewController: UIViewController {
 
                     case .updateData:
                         self?.tableHeroes.reloadData()
+                        
+                    case .navigateToMap:
+                        self?.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",
+                                     sender: nil)
+                        
+                    case .logoutAndExit:
+                        self?.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
+                                     sender: nil)
                 }
             }
         }
     }
     
-    // MARK: - Button Actions -
+    // MARK: - IBActions -
     @IBAction func logoutAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
-                     sender: nil)
+        viewModel?.logout()
     }
     
     @IBAction func mapAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",
-                     sender: nil)
+        viewModel?.viewState?(.navigateToMap)
     }
 }
 

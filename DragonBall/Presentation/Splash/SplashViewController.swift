@@ -39,6 +39,7 @@ class SplashViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true,
                                                      animated: animated)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
             case "SPLASH_TO_LOGIN":

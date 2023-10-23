@@ -24,7 +24,6 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     var heroesCount: Int {
         heroes.count
     }
-    
     private var heroes: Heroes = []
     
     // MARK: - Initializers -
@@ -44,9 +43,8 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             self.apiProvider.getHeroes(by: nil,
                                        token: token) { heroes in
                 self.heroes = heroes
-               
-                //TODO : coredata heroes
                 self.viewState?(.updateData)
+                //TODO : coredata heroes
                // self.createHero()
               //  self.countHeroes()
                 
@@ -61,7 +59,29 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             nil
         }
     }
+
+    func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?  {
+        guard let selectedHero = heroBy(index: index) else { return nil }
     
+        return HeroDetailViewModel(
+            hero: selectedHero,
+            apiProvider: apiProvider,
+            secureDataProvider: secureDataProvider
+        )
+    }
+    
+    func splashViewModel() -> SplashViewControllerDelegate? {
+        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider)
+    }
+    
+    func logout() {
+        secureDataProvider.delete()
+        DispatchQueue.main.async {
+            self.viewState?(.logoutAndExit)
+        }
+    }
+    
+    // MARK: - Coredata -
     func createHero() {
         guard let moc,
                 let entityHero = NSEntityDescription.entity(
@@ -85,21 +105,5 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             return
         }
         print("Heroes en base de datos: \(myHeroes.count )")
-    }
-    
-    func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?  {
-        guard let selectedHero = heroBy(index: index) else { return nil }
-    
-        return HeroDetailViewModel(
-            hero: selectedHero,
-            apiProvider: apiProvider,
-            secureDataProvider: secureDataProvider
-        )
-    }
-    func splashViewModel() -> SplashViewControllerDelegate? {
-        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider)
-    }
-    func logout() {
-        secureDataProvider.delete()
     }
 }

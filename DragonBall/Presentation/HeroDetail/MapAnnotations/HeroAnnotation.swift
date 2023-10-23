@@ -18,5 +18,4 @@ class HeroAnnotation: NSObject, MKAnnotation {
         self.info = info
         self.coordinate = coordinate
     }
-    
 }
