@@ -13,11 +13,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
-    private var moc: NSManagedObjectContext? {
-        (
-            CoreDataStack.shared.persistentContainer.viewContext
-        )
-    }
+    private let coreDataProvider: CoreDataProvider
     
     // MARK: - Properties -
     var viewState: ((HeroesViewState) -> Void)?
@@ -28,29 +24,34 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, 
-         secureDataProvider: SecureDataProviderProtocol) {
+         secureDataProvider: SecureDataProviderProtocol,
+         coreDataProvider: CoreDataProvider
+    ) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
+        self.coreDataProvider = coreDataProvider
     }
     
     // MARK: - Public functions -
     func onViewappear() {
         viewState?(.loading(true))
-
+        
         DispatchQueue.global().async {
             defer { self.viewState?(.loading(false)) }
             guard let token = self.secureDataProvider.get() else { return }
-            self.apiProvider.getHeroes(by: nil,
-                                       token: token) { heroes in
-                self.heroes = heroes
+            
+            if self.heroes.isEmpty {
+                self.apiProvider.getHeroes(by: nil,
+                                           token: token) { heroes in
+                    self.coreDataProvider.createHeroes(heroes: heroes)
+                    self.heroes = self.coreDataProvider.loadHeroes()
+                    self.viewState?(.updateData)
+                }
+            } else {
                 self.viewState?(.updateData)
-                //TODO : coredata heroes
-               // self.createHero()
-              //  self.countHeroes()
-                
+            }
             }
         }
-    }
     
     func heroBy(index: Int)  -> Hero? {
         if index >= 0 && index < heroesCount {
@@ -71,39 +72,15 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     }
     
     func splashViewModel() -> SplashViewControllerDelegate? {
-        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider)
+        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider, coreDataProvider: coreDataProvider)
     }
     
     func logout() {
         secureDataProvider.delete()
+        coreDataProvider.countHeroes()
+        coreDataProvider.deleteHeroes()
         DispatchQueue.main.async {
             self.viewState?(.logoutAndExit)
         }
-    }
-    
-    // MARK: - Coredata -
-    func createHero() {
-        guard let moc,
-                let entityHero = NSEntityDescription.entity(
-                    forEntityName: HeroDAO.entityName,
-                    in: moc
-                ) else { return }
-        for hero in heroes {
-            let heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
-            heroDAO.setValue(hero.name, forKey:  "name")
-            heroDAO.setValue(hero.description, forKey: "heroDescription")
-            heroDAO.setValue(hero.photo, forKey: "photo" )
-            try? moc.save()
-        }
-    }
-    
-    func countHeroes() {
-        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
-        guard let moc,
-        let myHeroes = try? moc.fetch(fetchHero)
-        else {
-            return
-        }
-        print("Heroes en base de datos: \(myHeroes.count )")
     }
 }

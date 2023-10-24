@@ -10,20 +10,23 @@ import Foundation
 class SplashViewModel: SplashViewControllerDelegate {
     private let secureDataProvider: SecureDataProviderProtocol
     private let apiProvider: ApiProviderProtocol
+    private let coreDataProvider: CoreDataProvider
     
     var viewState: ((SplashViewState) -> Void)?
     
     lazy var loginViewModel: LoginViewControllerDelegate = {
             LoginViewModel(
                 apiProvider: apiProvider,
-                secureDataProvider: secureDataProvider
+                secureDataProvider: secureDataProvider,
+                coreDataProvider: coreDataProvider
             )
         }()
 
         lazy var heroesViewModel: HeroesViewControllerDelegate = {
             HeroesViewModel(
                 apiProvider: apiProvider,
-                secureDataProvider: secureDataProvider
+                secureDataProvider: secureDataProvider,
+                coreDataProvider: coreDataProvider
             )
         }()
     
@@ -31,9 +34,10 @@ class SplashViewModel: SplashViewControllerDelegate {
         secureDataProvider.get()?.isEmpty == false
     }
     
-    init(secureDataProvider: SecureDataProviderProtocol, apiProvider: ApiProviderProtocol) {
+    init(secureDataProvider: SecureDataProviderProtocol, apiProvider: ApiProviderProtocol, coreDataProvider: CoreDataProvider) {
         self.secureDataProvider = secureDataProvider
         self.apiProvider = apiProvider
+        self.coreDataProvider = coreDataProvider
     }
     
     func onViewAppear() {

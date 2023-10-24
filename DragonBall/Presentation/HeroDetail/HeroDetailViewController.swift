@@ -11,7 +11,6 @@ import MapKit
 
 protocol HeroesDetailViewControllerDelegate {
     var viewState: ((HeroDetailViewState) -> Void)? {get set}
-    //func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
     func onViewAppear()
 }
 
@@ -55,6 +54,7 @@ class HeroDetailViewController: UIViewController {
             }
         }
     }
+    
     private func updateViews(hero: Hero?, heroLocations: HeroLocations) {
         photoView.kf.setImage(with: URL(string: hero?.photo ?? ""))
         makeRounded(image: photoView)
@@ -74,6 +74,7 @@ class HeroDetailViewController: UIViewController {
         }
     }
     
+    // TODO: sacarlo a una extension
     private func makeRounded(image: UIImageView) {
         image.layer.borderWidth = 1
         image.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.6)

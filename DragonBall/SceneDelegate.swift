@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder,
         let rootViewController = splashStoryboard.instantiateViewController(withIdentifier: "SplashView") as?  SplashViewController
         rootViewController?.viewModel = SplashViewModel(
             secureDataProvider: SecureDataProvider(),
-            apiProvider: ApiProvider()
+            apiProvider: ApiProvider(), coreDataProvider: CoreDataProvider()
         )
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: rootViewController ?? UIViewController())

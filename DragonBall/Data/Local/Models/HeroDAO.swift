@@ -18,3 +18,20 @@ class HeroDAO: NSManagedObject {
     @NSManaged var photo: String?
     @NSManaged var favorite: Bool
 }
+
+extension HeroDAO: HeroAndLocationConvertible {
+    func toModel() -> Hero? {
+        return Hero(
+            id: id,
+            name: name,
+            description: heroDescription,
+            photo: photo,
+            isFavorite: favorite
+        )
+    }
+    
+    typealias Model = Hero
+    
+    
+    
+}

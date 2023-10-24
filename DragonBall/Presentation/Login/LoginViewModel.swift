@@ -11,23 +11,26 @@ class LoginViewModel: LoginViewControllerDelegate {
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
+    private let coreDataProvider: CoreDataProvider
     
     // MARK: - Properties -
     var viewState: ((LoginViewState) -> Void)?
     var heroesViewModel: HeroesViewControllerDelegate {
         HeroesViewModel(
             apiProvider: apiProvider,
-            secureDataProvider: secureDataProvider
+            secureDataProvider: secureDataProvider, coreDataProvider: coreDataProvider
         )
     }
     
     // MARK: - Init -
     init(
         apiProvider: ApiProviderProtocol,
-        secureDataProvider: SecureDataProviderProtocol
+        secureDataProvider: SecureDataProviderProtocol,
+        coreDataProvider: CoreDataProvider
     ) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
+        self.coreDataProvider = coreDataProvider
         
         //Esto se hace así para usarlo de ejemplo de observer
         NotificationCenter.default.addObserver(
@@ -40,7 +43,6 @@ class LoginViewModel: LoginViewControllerDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        
     }
     
     // MARK: - Public functions -

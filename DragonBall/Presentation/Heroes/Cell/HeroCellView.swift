@@ -33,7 +33,6 @@ class HeroCellView: UITableViewCell {
         containerView.layer.shadowOffset = .zero
         containerView.layer.shadowRadius = 8
         containerView.layer.shadowOpacity = 0.6
-        
         photo.layer.cornerRadius = 8
         photo.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         

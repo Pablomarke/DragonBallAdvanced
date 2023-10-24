@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		391491192AE6F1DE0085378E /* LocationDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391491182AE6F1DE0085378E /* LocationDAO.swift */; };
+		3914911B2AE6F34E0085378E /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914911A2AE6F34E0085378E /* CoreDataProvider.swift */; };
 		395D5FC12ADF02D100C34F7C /* HeroDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC02ADF02D100C34F7C /* HeroDAO.swift */; };
 		395D5FC32ADF052100C34F7C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC22ADF052100C34F7C /* CoreDataStack.swift */; };
 		395D5FC62ADF0C2C00C34F7C /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC52ADF0C2C00C34F7C /* Hero.swift */; };
@@ -61,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		391491182AE6F1DE0085378E /* LocationDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDAO.swift; sourceTree = "<group>"; };
+		3914911A2AE6F34E0085378E /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		395D5FC02ADF02D100C34F7C /* HeroDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDAO.swift; sourceTree = "<group>"; };
 		395D5FC22ADF052100C34F7C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		395D5FC52ADF0C2C00C34F7C /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				395D5FC02ADF02D100C34F7C /* HeroDAO.swift */,
+				391491182AE6F1DE0085378E /* LocationDAO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				39DC25152AD71A61005416C0 /* DragonBall.xcdatamodeld */,
 				399EA9552ADA9CD70045B16D /* SecureDataProvider.swift */,
 				395D5FC22ADF052100C34F7C /* CoreDataStack.swift */,
+				3914911A2AE6F34E0085378E /* CoreDataProvider.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -485,8 +491,10 @@
 				395D5FCC2AE0367500C34F7C /* HeroCellView.swift in Sources */,
 				3978BB732ADDD5650046C7B3 /* HeroesViewModel.swift in Sources */,
 				395D5FD92AE1BC2E00C34F7C /* HeroDetailViewController.swift in Sources */,
+				3914911B2AE6F34E0085378E /* CoreDataProvider.swift in Sources */,
 				395D5FC12ADF02D100C34F7C /* HeroDAO.swift in Sources */,
 				39DC250D2AD71A61005416C0 /* AppDelegate.swift in Sources */,
+				391491192AE6F1DE0085378E /* LocationDAO.swift in Sources */,
 				39DC25472AD725F7005416C0 /* LoginViewModel.swift in Sources */,
 				399EA9582ADA9F960045B16D /* ApiProvider.swift in Sources */,
 				395D5FC62ADF0C2C00C34F7C /* Hero.swift in Sources */,
