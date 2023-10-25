@@ -53,7 +53,10 @@ class LoginViewController: UIViewController {
         setObservers()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?
+    ) {
         guard segue.identifier == "LOGIN_TO_HEROES",
               let heroesViewController = segue.destination as? HeroesViewController else {
             return
@@ -90,7 +93,6 @@ class LoginViewController: UIViewController {
                         
                     case .showErrorEmail(let error):
                         self?.emailFieldError.text = error
-                        //echar un ojo a esta lógica
                         self?.emailFieldError.isHidden = (error == nil || error?.isEmpty == true)
                         
                     case .showErrorPassword(let error):

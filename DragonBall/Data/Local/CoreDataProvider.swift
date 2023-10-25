@@ -46,14 +46,15 @@ class CoreDataProvider {
         return heroesSaved
     }
     
-    func countHeroes() {
+    func countHeroes() -> Int {
         let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
         guard let moc,
         let myHeroes = try? moc.fetch(fetchHero)
         else {
-            return
+            return 0
         }
         print("Heroes en base de datos: \(myHeroes.count )")
+        return myHeroes.count
     }
     
     func deleteHeroes() {
@@ -65,6 +66,6 @@ class CoreDataProvider {
         }
         myHeroes.forEach { moc.delete($0)}
         try? moc.save()
-        print("Heroes en base de datos: \(myHeroes.count )")
+        print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
     }
 }

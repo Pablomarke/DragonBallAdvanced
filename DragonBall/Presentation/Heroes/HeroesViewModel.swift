@@ -36,22 +36,12 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     func onViewappear() {
         viewState?(.loading(true))
         
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             defer { self.viewState?(.loading(false)) }
-            guard let token = self.secureDataProvider.get() else { return }
             
-            if self.heroes.isEmpty {
-                self.apiProvider.getHeroes(by: nil,
-                                           token: token) { heroes in
-                    self.coreDataProvider.createHeroes(heroes: heroes)
-                    self.heroes = self.coreDataProvider.loadHeroes()
-                    self.viewState?(.updateData)
-                }
-            } else {
-                self.viewState?(.updateData)
-            }
-            }
+            self.coreDataProvider.countHeroes() == 0 ? self.callHeroes() : self.callLocalHeroes()
         }
+    }
     
     func heroBy(index: Int)  -> Hero? {
         if index >= 0 && index < heroesCount {
@@ -72,13 +62,32 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     }
     
     func splashViewModel() -> SplashViewControllerDelegate? {
-        return SplashViewModel(secureDataProvider: secureDataProvider, apiProvider: apiProvider, coreDataProvider: coreDataProvider)
+        return SplashViewModel(
+            secureDataProvider: secureDataProvider,
+            apiProvider: apiProvider,
+            coreDataProvider: coreDataProvider
+        )
     }
     
+    func callLocalHeroes() {
+        self.heroes = self.coreDataProvider.loadHeroes()
+        self.viewState?(.updateData)
+        print("habia")
+    }
+    
+    func callHeroes() {
+        guard let token = self.secureDataProvider.get() else { return }
+
+        self.apiProvider.getHeroes(by: nil,
+                                   token: token) { heroes in
+            self.coreDataProvider.createHeroes(heroes: heroes)
+            self.heroes = self.coreDataProvider.loadHeroes()
+            print("no habia")
+            self.viewState?(.updateData)
+        }
+    }
     func logout() {
         secureDataProvider.delete()
-        coreDataProvider.countHeroes()
-        coreDataProvider.deleteHeroes()
         DispatchQueue.main.async {
             self.viewState?(.logoutAndExit)
         }
