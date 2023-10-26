@@ -10,26 +10,69 @@ import MapKit
 
 protocol MapHeroesControllerDelegate {
     func onViewappear()
+    var viewState: ((MapViewState) -> Void)? { get set }
 }
 
+enum MapViewState {
+    case updateMap(locations: HeroLocations)
+    case loading(_ isLoading: Bool)
+}
 
 class MapHeroesController: UIViewController {
     
-    @IBOutlet weak var heroesMap: MKMapView!
+    var viewModel: MapHeroesControllerDelegate?
     
+    @IBOutlet weak var heroesMap: MKMapView!
     
     // MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initViews()
+        setObservers()
+        viewModel?.onViewappear()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false,
                                                      animated: animated)
         navigationController?.navigationBar.tintColor = .orange
         navigationItem.title = "Mapa Heroes"
-        
-
     }
+    
+    private func initViews() {
+        heroesMap.delegate = self
+    }
+    
+    private func setObservers() {
+        viewModel?.viewState = { [weak self] state in
+            DispatchQueue.main.async {
+                switch state {
+                    case .updateMap(let mapHeroLocations):
+                        self?.updateMap(mapHeroLocations: mapHeroLocations )
+                        
+                    case .loading(_):
+                        break
+                }
+            }
+        }
+    }
+    
+    private func updateMap(mapHeroLocations: HeroLocations) {
+        mapHeroLocations.forEach {
+            heroesMap.addAnnotation(
+                HeroAnnotation(
+                    title: "$0.hero?.name",
+                    info: "$0.hero?.id",
+                coordinate: .init(
+                    latitude: Double($0.latitude ?? "") ?? 0.0,
+                    longitude: Double($0.longitude ?? "") ?? 0.0)
+                )
+            )
+        }
+    }
+}
+
+extension MapHeroesController: MKMapViewDelegate {
+    
 }

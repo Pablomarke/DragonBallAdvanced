@@ -12,6 +12,7 @@ protocol HeroesViewControllerDelegate {
     var heroesCount: Int {get}
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
     func splashViewModel() -> SplashViewControllerDelegate?
+    func mapHeroesViewModel() -> MapHeroesControllerDelegate?
     func onViewappear()
     func heroBy(index: Int)  -> Hero?
     func logout()
@@ -64,9 +65,11 @@ class HeroesViewController: UIViewController {
                 navigationItem.backBarButtonItem = backItem
                 
             case "HEROES_TO_MAPHEROES":
-                guard let mapHeroesController = segue.destination as? MapHeroesController else {
+                guard let mapHeroesController = segue.destination as? MapHeroesController,
+                      let mapHeroesViewModel = viewModel?.mapHeroesViewModel() else {
                     return
                 }
+                mapHeroesController.viewModel = mapHeroesViewModel
                 
                 
             case "HEROES_TO_SPLASHVIEW":

@@ -17,6 +17,7 @@ class HeroDAO: NSManagedObject {
     @NSManaged var heroDescription: String?
     @NSManaged var photo: String?
     @NSManaged var favorite: Bool
+    @NSManaged var locations: [LocationDAO]
 }
 
 extension HeroDAO: HeroAndLocationConvertible {
@@ -29,9 +30,5 @@ extension HeroDAO: HeroAndLocationConvertible {
             isFavorite: favorite
         )
     }
-    
     typealias Model = Hero
-    
-    
-    
 }

@@ -40,7 +40,7 @@ class CoreDataProvider {
         var heroesSaved: Heroes = []
         
         for hero in myHeros {
-            var myNewHero = hero.toModel()!
+            let myNewHero = hero.toModel()!
             heroesSaved.append(myNewHero)
         }
         return heroesSaved
@@ -67,5 +67,50 @@ class CoreDataProvider {
         myHeroes.forEach { moc.delete($0)}
         try? moc.save()
         print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
+    }
+    
+    func getAllIds() -> [String] {
+        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
+        guard let moc,
+              let myHeros = try? moc.fetch(fetchHero)
+                 else { return [] }
+        var heroesIds: [String] = []
+        
+        for hero in myHeros {
+            let myHeroId = hero.id ?? ""
+            heroesIds.append(myHeroId)
+        }
+        return heroesIds
+    }
+    
+    func createLocations(locations: HeroLocations) {
+        guard let moc,
+                let entityHero = NSEntityDescription.entity(
+                    forEntityName: LocationDAO.entityName,
+                    in: moc
+                ) else { return }
+        for location in locations {
+            let locationDAO = LocationDAO(entity: entityHero, insertInto: moc)
+            locationDAO.setValue(location.id, forKey: "id")
+            locationDAO.setValue(location.date , forKey: "date")
+            locationDAO.setValue(location.latitude , forKey: "latitude")
+            locationDAO.setValue(location.longitude , forKey: "longitude")
+           //locationDAO.setValue(location.hero , forKey: "hero")
+            try? moc.save()
+        }
+    }
+    
+    func loadLocations() -> HeroLocations {
+        let fetchLocation = NSFetchRequest<LocationDAO>(entityName: "LocationDAO")
+        guard let moc,
+              let myLocations = try? moc.fetch(fetchLocation)
+                 else { return [] }
+        var locationsSaved: HeroLocations = []
+        
+        for location in myLocations {
+            let newLocation = location.toModel()
+            locationsSaved.append(newLocation!)
+        }
+        return locationsSaved
     }
 }

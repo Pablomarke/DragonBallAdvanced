@@ -69,6 +69,14 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         )
     }
     
+    func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
+        return MapHeroesViewModel(
+            coreDataProvider: coreDataProvider,
+            apiProvider: apiProvider,
+            secureDataProvider: secureDataProvider
+        )
+    }
+    
     func callLocalHeroes() {
         self.heroes = self.coreDataProvider.loadHeroes()
         self.viewState?(.updateData)
