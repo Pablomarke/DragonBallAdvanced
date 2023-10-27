@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 typealias Heroes = [Hero]
 
@@ -23,4 +24,25 @@ struct Hero: Codable {
     let description: String?
     let photo: String?
     let isFavorite: Bool?
+}
+
+extension Hero {
+    @discardableResult
+    func toManagedObject(in context: NSManagedObjectContext) -> HeroDAO? {
+        let entityName = HeroDAO.entityName
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
+            NSLog("Can't create entity \(entityName)")
+            return nil
+        }
+        
+        let object = HeroDAO.init(entity: entityDescription, 
+                                  insertInto: context)
+        object.id = id
+        object.name = name
+        object.heroDescription = description
+        object.photo = photo
+        object.favorite = isFavorite ?? false
+        object.locations = []
+        return object
+    }
 }

@@ -16,7 +16,7 @@ protocol HeroesDetailViewControllerDelegate {
 
 enum HeroDetailViewState {
     case loading(_ isLoading: Bool)
-    case update(hero: Hero?, locations: HeroLocations)
+    case update(hero: HeroDAO?, locations: [LocationDAO])
 }
 
 class HeroDetailViewController: UIViewController {
@@ -47,21 +47,22 @@ class HeroDetailViewController: UIViewController {
                     case .loading(let isLoading):
                         break
                         
-                    case .update(let hero, let heroLocations):
-                        self?.updateViews(hero: hero,
+                    case .update(let heroDAO, let heroLocations):
+                        self?.updateViews(hero: heroDAO,
                                           heroLocations: heroLocations)
                 }
             }
         }
     }
     
-    private func updateViews(hero: Hero?, heroLocations: HeroLocations) {
+    private func updateViews(hero: HeroDAO?, heroLocations: [LocationDAO]?) {
         photoView.kf.setImage(with: URL(string: hero?.photo ?? ""))
         makeRounded(image: photoView)
+
         nameLabel.text = hero?.name
-        heroDescription.text = hero?.description
+        heroDescription.text = hero?.heroDescription
         
-        heroLocations.forEach {
+        heroLocations?.forEach {
             mapView.addAnnotation(
                 HeroAnnotation(
                 title: hero?.name,
@@ -83,8 +84,8 @@ class HeroDetailViewController: UIViewController {
         image.clipsToBounds = true
     }
 }
-extension HeroDetailViewController: MKMapViewDelegate{
-    // aqui en vez de una chincheta podemos poner otra cosa
+//MARK: — MKMapView Delegate Methods
+extension HeroDetailViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return nil
     }

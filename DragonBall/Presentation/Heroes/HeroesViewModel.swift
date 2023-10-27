@@ -9,6 +9,9 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
+    func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
+        return mapHeroesViewModel()
+    }
 
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
@@ -20,7 +23,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     var heroesCount: Int {
         heroes.count
     }
-    private var heroes: Heroes = []
+    private var heroes: [HeroDAO] = []
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, 
@@ -43,7 +46,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         }
     }
     
-    func heroBy(index: Int)  -> Hero? {
+    func heroBy(index: Int)  -> HeroDAO? {
         if index >= 0 && index < heroesCount {
             heroes[index]
         } else {
@@ -57,7 +60,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         return HeroDetailViewModel(
             hero: selectedHero,
             apiProvider: apiProvider,
-            secureDataProvider: secureDataProvider
+            secureDataProvider: secureDataProvider, coreDataProvider: coreDataProvider
         )
     }
     
@@ -68,14 +71,15 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             coreDataProvider: coreDataProvider
         )
     }
-    
+    /*
     func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
         return MapHeroesViewModel(
+            heroes: self.heroes,
             coreDataProvider: coreDataProvider,
             apiProvider: apiProvider,
             secureDataProvider: secureDataProvider
         )
-    }
+    }*/
     
     func callLocalHeroes() {
         self.heroes = self.coreDataProvider.loadHeroes()

@@ -16,18 +16,7 @@ class LocationDAO: NSManagedObject {
     @NSManaged var date: String?
     @NSManaged var latitude: String?
     @NSManaged var longitude: String?
-   // @NSManaged var hero: HeroDAO?
+    @NSManaged var hero: HeroDAO?
 }
 
-extension LocationDAO: HeroAndLocationConvertible {
-    func toModel() -> HeroLocation? {
-        return HeroLocation(
-            id: id,
-            latitude: latitude,
-            longitude: longitude,
-            date: date
-            //hero: hero?.toModel()
-        )
-    }
-    typealias Model = HeroLocation
-}
+

@@ -22,28 +22,24 @@ class CoreDataProvider {
                     in: moc
                 ) else { return }
         for hero in heroes {
-            let heroDAO = HeroDAO(entity: entityHero, insertInto: moc)
+            let heroDAO = HeroDAO(entity: entityHero, 
+                                  insertInto: moc)
             heroDAO.setValue(hero.name, forKey:  "name")
             heroDAO.setValue(hero.description, forKey: "heroDescription")
             heroDAO.setValue(hero.photo, forKey: "photo" )
             heroDAO.setValue(hero.id, forKey: "id")
             heroDAO.setValue(hero.isFavorite, forKey: "favorite")
+            heroDAO.setValue([], forKey: "locations")
             try? moc.save()
         }
     }
     
-    func loadHeroes() -> Heroes {
+    func loadHeroes() -> [HeroDAO]  {
         let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
         guard let moc,
               let myHeros = try? moc.fetch(fetchHero)
                  else { return [] }
-        var heroesSaved: Heroes = []
-        
-        for hero in myHeros {
-            let myNewHero = hero.toModel()!
-            heroesSaved.append(myNewHero)
-        }
-        return heroesSaved
+        return myHeros
     }
     
     func countHeroes() -> Int {
@@ -69,6 +65,49 @@ class CoreDataProvider {
         print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
     }
     
+    func createLocations(locations: Locations)  {
+        guard let moc,
+                let entityLocation = NSEntityDescription.entity(
+                    forEntityName: LocationDAO.entityName,
+                    in: moc
+                ) else { return  }
+        for location in locations {
+            let locationDAO = LocationDAO(entity: entityLocation,
+                                          insertInto: moc)
+            locationDAO.setValue(location.id, forKey: "id")
+            locationDAO.setValue(location.date , forKey: "date")
+            locationDAO.setValue(location.latitude , forKey: "latitude")
+            locationDAO.setValue(location.longitude , forKey: "longitude")
+          //  locationDAO.setValue(location.hero?.toManagedObject(in: moc) ,
+                               //  forKey: "hero")
+            
+            try? moc.save()
+        }
+    }
+    
+    func loadLocations() -> [LocationDAO] {
+        let fetchLocation = NSFetchRequest<LocationDAO>(entityName: "LocationDAO")
+        guard let moc,
+              let myLocations = try? moc.fetch(fetchLocation)
+                 else { return [] }
+        var locationsSaved: [LocationDAO] = []
+        for location in myLocations {
+            locationsSaved.append(location)
+        }
+        return locationsSaved
+    }
+    
+    func countLocations() -> Int {
+        let fetchLocation = NSFetchRequest<LocationDAO>(entityName: "LocationDAO")
+        guard let moc,
+        let myLocations = try? moc.fetch(fetchLocation)
+        else {
+            return 0
+        }
+        print("Localizaciones en base de datos: \(myLocations.count )")
+        return myLocations.count
+    }
+    
     func getAllIds() -> [String] {
         let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
         guard let moc,
@@ -81,36 +120,5 @@ class CoreDataProvider {
             heroesIds.append(myHeroId)
         }
         return heroesIds
-    }
-    
-    func createLocations(locations: HeroLocations) {
-        guard let moc,
-                let entityHero = NSEntityDescription.entity(
-                    forEntityName: LocationDAO.entityName,
-                    in: moc
-                ) else { return }
-        for location in locations {
-            let locationDAO = LocationDAO(entity: entityHero, insertInto: moc)
-            locationDAO.setValue(location.id, forKey: "id")
-            locationDAO.setValue(location.date , forKey: "date")
-            locationDAO.setValue(location.latitude , forKey: "latitude")
-            locationDAO.setValue(location.longitude , forKey: "longitude")
-           //locationDAO.setValue(location.hero , forKey: "hero")
-            try? moc.save()
-        }
-    }
-    
-    func loadLocations() -> HeroLocations {
-        let fetchLocation = NSFetchRequest<LocationDAO>(entityName: "LocationDAO")
-        guard let moc,
-              let myLocations = try? moc.fetch(fetchLocation)
-                 else { return [] }
-        var locationsSaved: HeroLocations = []
-        
-        for location in myLocations {
-            let newLocation = location.toModel()
-            locationsSaved.append(newLocation!)
-        }
-        return locationsSaved
     }
 }

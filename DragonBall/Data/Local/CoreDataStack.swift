@@ -8,11 +8,7 @@
 import Foundation
 import CoreData
 
-// MARK: - Core Data protocol
-protocol HeroAndLocationConvertible {
-    associatedtype Model
-    func toModel() -> Model?
-}
+
 
 // MARK: - Core Data stack
 class CoreDataStack: NSObject {

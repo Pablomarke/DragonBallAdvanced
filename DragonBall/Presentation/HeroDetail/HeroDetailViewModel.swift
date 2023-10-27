@@ -10,16 +10,19 @@ import Foundation
 class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
+    private let coreDataProvider: CoreDataProvider
     var viewState: ((HeroDetailViewState) -> Void)?
-    private var hero: Hero
-    private var heroLocations: HeroLocations = []
+    private var hero: HeroDAO
+    private var heroLocations: [LocationDAO] = []
     
-    init(hero: Hero,
+    init(hero: HeroDAO,
          apiProvider: ApiProviderProtocol,
-         secureDataProvider: SecureDataProviderProtocol
+         secureDataProvider: SecureDataProviderProtocol,
+         coreDataProvider: CoreDataProvider
     ) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
+        self.coreDataProvider = coreDataProvider 
         self.hero = hero
     }
     
@@ -35,10 +38,12 @@ class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
             self.apiProvider.getLocations(
                 by: self.hero.id,
                 token: token
-            ) { [weak self] heroLocations in
-                self?.heroLocations = heroLocations
+            ) { [weak self] locations in
+                 self?.coreDataProvider.createLocations(locations: locations)
+                 self?.heroLocations = self?.coreDataProvider.loadLocations() ?? []
+                
                 self?.viewState?(.update(hero: self?.hero,
-                                         locations: heroLocations))
+                                         locations: self?.heroLocations ?? []))
             }
         }
     }

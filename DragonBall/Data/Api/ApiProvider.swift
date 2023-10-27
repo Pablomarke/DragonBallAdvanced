@@ -15,7 +15,7 @@ extension NotificationCenter {
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String)
     func getHeroes(by name: String?, token: String, completion: ((Heroes) -> Void)?)
-    func getLocations(by heroId: String?, token: String, completion: ((HeroLocations) -> Void)? )
+    func getLocations(by heroId: String?, token: String, completion: ((Locations) -> Void)? )
 }
 
 class ApiProvider: ApiProviderProtocol {
@@ -103,7 +103,7 @@ class ApiProvider: ApiProviderProtocol {
         }.resume()
     }
     
-    func getLocations(by heroId: String?, token: String, completion: ((HeroLocations) -> Void)? ) {
+    func getLocations(by heroId: String?, token: String, completion: ((Locations) -> Void)? ) {
         guard let url = URL(string: "\(ApiProvider.apiBaseURL)\(Endpoint.heroLocations)") else {
             return
         }
@@ -133,7 +133,7 @@ class ApiProvider: ApiProviderProtocol {
                 return
             }
             
-            guard let heroLocations = try? JSONDecoder().decode(HeroLocations.self, from: data) else {
+            guard let heroLocations = try? JSONDecoder().decode(Locations.self, from: data) else {
                 completion?([])
                 return
             }

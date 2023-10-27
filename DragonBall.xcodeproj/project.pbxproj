@@ -20,7 +20,7 @@
 		395D5FD72AE1BC1900C34F7C /* HeroDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 395D5FD62AE1BC1900C34F7C /* HeroDetail.storyboard */; };
 		395D5FD92AE1BC2E00C34F7C /* HeroDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FD82AE1BC2E00C34F7C /* HeroDetailViewController.swift */; };
 		395D5FDB2AE1BC4300C34F7C /* HeroDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FDA2AE1BC4300C34F7C /* HeroDetailViewModel.swift */; };
-		395D5FDD2AE1C0CB00C34F7C /* HeroLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FDC2AE1C0CB00C34F7C /* HeroLocation.swift */; };
+		395D5FDD2AE1C0CB00C34F7C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FDC2AE1C0CB00C34F7C /* Location.swift */; };
 		395D5FE02AE1CAFF00C34F7C /* HeroAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FDF2AE1CAFF00C34F7C /* HeroAnnotation.swift */; };
 		3978BB6A2ADDB8130046C7B3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3978BB692ADDB8130046C7B3 /* Kingfisher */; };
 		3978BB6F2ADDD5460046C7B3 /* Heroes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3978BB6E2ADDD5460046C7B3 /* Heroes.storyboard */; };
@@ -76,7 +76,7 @@
 		395D5FD62AE1BC1900C34F7C /* HeroDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HeroDetail.storyboard; sourceTree = "<group>"; };
 		395D5FD82AE1BC2E00C34F7C /* HeroDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewController.swift; sourceTree = "<group>"; };
 		395D5FDA2AE1BC4300C34F7C /* HeroDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailViewModel.swift; sourceTree = "<group>"; };
-		395D5FDC2AE1C0CB00C34F7C /* HeroLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroLocation.swift; sourceTree = "<group>"; };
+		395D5FDC2AE1C0CB00C34F7C /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		395D5FDF2AE1CAFF00C34F7C /* HeroAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAnnotation.swift; sourceTree = "<group>"; };
 		3978BB6E2ADDD5460046C7B3 /* Heroes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Heroes.storyboard; sourceTree = "<group>"; };
 		3978BB702ADDD5550046C7B3 /* HeroesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesViewController.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				395D5FC52ADF0C2C00C34F7C /* Hero.swift */,
-				395D5FDC2AE1C0CB00C34F7C /* HeroLocation.swift */,
+				395D5FDC2AE1C0CB00C34F7C /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				399EA9582ADA9F960045B16D /* ApiProvider.swift in Sources */,
 				395D5FC62ADF0C2C00C34F7C /* Hero.swift in Sources */,
 				39DC250F2AD71A61005416C0 /* SceneDelegate.swift in Sources */,
-				395D5FDD2AE1C0CB00C34F7C /* HeroLocation.swift in Sources */,
+				395D5FDD2AE1C0CB00C34F7C /* Location.swift in Sources */,
 				395D5FDB2AE1BC4300C34F7C /* HeroDetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

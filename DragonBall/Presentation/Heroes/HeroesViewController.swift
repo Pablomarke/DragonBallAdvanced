@@ -14,7 +14,7 @@ protocol HeroesViewControllerDelegate {
     func splashViewModel() -> SplashViewControllerDelegate?
     func mapHeroesViewModel() -> MapHeroesControllerDelegate?
     func onViewappear()
-    func heroBy(index: Int)  -> Hero?
+    func heroBy(index: Int)  -> HeroDAO?
     func logout()
 }
 
@@ -154,7 +154,7 @@ extension HeroesViewController: UITableViewDelegate,
             cell.updateView(
                 name: hero.name,
                 photo: hero.photo,
-                description: hero.description
+                description: hero.heroDescription
             )
         }
         return cell
