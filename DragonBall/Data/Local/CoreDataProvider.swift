@@ -53,24 +53,14 @@ class CoreDataProvider {
         return myHeroes.count
     }
     
-    func deleteHeroes() {
-        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
-        guard let moc,
-              let myHeroes = try? moc.fetch(fetchHero)
-        else {
-            return
-        }
-        myHeroes.forEach { moc.delete($0)}
-        try? moc.save()
-        print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
-    }
-    
-    func createLocations(locations: Locations)  {
+// MARK: - Localizaciones -
+    func createLocations(locations: HeroLocations)  {
         guard let moc,
                 let entityLocation = NSEntityDescription.entity(
                     forEntityName: LocationDAO.entityName,
                     in: moc
                 ) else { return  }
+        
         for location in locations {
             let locationDAO = LocationDAO(entity: entityLocation,
                                           insertInto: moc)
@@ -78,9 +68,7 @@ class CoreDataProvider {
             locationDAO.setValue(location.date , forKey: "date")
             locationDAO.setValue(location.latitude , forKey: "latitude")
             locationDAO.setValue(location.longitude , forKey: "longitude")
-          //  locationDAO.setValue(location.hero?.toManagedObject(in: moc) ,
-                               //  forKey: "hero")
-            
+            locationDAO.setValue(location.hero , forKey: "hero")
             try? moc.save()
         }
     }
@@ -120,5 +108,30 @@ class CoreDataProvider {
             heroesIds.append(myHeroId)
         }
         return heroesIds
+    }
+    
+    // MARK: - Funciones de Borrado -
+    func deleteHeroes() {
+        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
+        guard let moc,
+              let myHeroes = try? moc.fetch(fetchHero)
+        else {
+            return
+        }
+        myHeroes.forEach { moc.delete($0)}
+        try? moc.save()
+        print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
+    }
+    
+    func deleteLocations() {
+        let fetchLocations = NSFetchRequest<LocationDAO>(entityName: "LocationDAO")
+        guard let moc,
+              let myLocations = try? moc.fetch(fetchLocations)
+        else {
+            return
+        }
+        myLocations.forEach { moc.delete($0)}
+        try? moc.save()
+        print("Localizaciones en base de datos despues del borrado: \(myLocations.count )")
     }
 }

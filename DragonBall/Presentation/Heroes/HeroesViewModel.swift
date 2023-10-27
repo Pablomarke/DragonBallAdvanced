@@ -9,9 +9,6 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
-    func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
-        return mapHeroesViewModel()
-    }
 
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
@@ -71,7 +68,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             coreDataProvider: coreDataProvider
         )
     }
-    /*
+    
     func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
         return MapHeroesViewModel(
             heroes: self.heroes,
@@ -79,7 +76,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             apiProvider: apiProvider,
             secureDataProvider: secureDataProvider
         )
-    }*/
+    }
     
     func callLocalHeroes() {
         self.heroes = self.coreDataProvider.loadHeroes()

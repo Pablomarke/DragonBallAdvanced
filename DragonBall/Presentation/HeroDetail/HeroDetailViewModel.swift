@@ -40,8 +40,7 @@ class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
                 token: token
             ) { [weak self] locations in
                  self?.coreDataProvider.createLocations(locations: locations)
-                 self?.heroLocations = self?.coreDataProvider.loadLocations() ?? []
-                
+                self?.heroLocations = self?.coreDataProvider.loadLocations() ?? []
                 self?.viewState?(.update(hero: self?.hero,
                                          locations: self?.heroLocations ?? []))
             }

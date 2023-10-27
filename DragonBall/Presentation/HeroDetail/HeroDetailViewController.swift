@@ -55,23 +55,21 @@ class HeroDetailViewController: UIViewController {
         }
     }
     
-    private func updateViews(hero: HeroDAO?, heroLocations: [LocationDAO]?) {
+    private func updateViews(hero: HeroDAO?, heroLocations: [LocationDAO]) {
         photoView.kf.setImage(with: URL(string: hero?.photo ?? ""))
         makeRounded(image: photoView)
 
         nameLabel.text = hero?.name
         heroDescription.text = hero?.heroDescription
         
-        heroLocations?.forEach {
-            mapView.addAnnotation(
-                HeroAnnotation(
-                title: hero?.name,
-                info: hero?.id,
+        for onelocation in heroLocations {
+            let annotation = HeroAnnotation(
+                title: onelocation.hero?.name,
+                info: hero?.id, 
                 coordinate: .init(
-                    latitude: Double($0.latitude ?? "") ?? 0.0,
-                    longitude: Double($0.longitude ?? "") ?? 0.0)
-                )
-            )
+                    latitude: Double(onelocation.latitude ?? "") ?? 0.0,
+                    longitude: Double(onelocation.longitude ?? "") ?? 0.0))
+            mapView.addAnnotation(annotation)
         }
     }
     

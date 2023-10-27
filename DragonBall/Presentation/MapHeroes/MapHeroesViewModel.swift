@@ -13,15 +13,18 @@ class MapHeroesViewModel: MapHeroesControllerDelegate {
     private let coreDataProvider: CoreDataProvider
     
     var viewState: ((MapViewState) -> Void)?
-    private var mapHeroLocations: HeroLocations = []
+    private var mapHeroLocations: [LocationDAO] = []
+    private var heroes: [HeroDAO]
     
-    init(coreDataProvider: CoreDataProvider,
+    init(heroes: [HeroDAO],
+         coreDataProvider: CoreDataProvider,
          apiProvider: ApiProviderProtocol,
          secureDataProvider: SecureDataProviderProtocol
     ) {
         self.apiProvider = apiProvider
         self.secureDataProvider = secureDataProvider
         self.coreDataProvider = coreDataProvider
+        self.heroes = heroes
     }
     
     func onViewappear() {
@@ -41,7 +44,7 @@ class MapHeroesViewModel: MapHeroesControllerDelegate {
                 }
             }
             self.mapHeroLocations = self.coreDataProvider.loadLocations()
-            print(self.mapHeroLocations.count)
+            print("Localizaciones en mapa: \(self.mapHeroLocations.count)")
             self.viewState?(.updateMap(locations: self.mapHeroLocations))
         }
     }

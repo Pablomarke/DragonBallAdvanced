@@ -7,9 +7,10 @@
 
 import Foundation
 import CoreData
-typealias Locations = [Location]
 
-struct Location: Codable {
+typealias HeroLocations = [HeroLocation]
+
+struct HeroLocation: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case hero
@@ -22,7 +23,7 @@ struct Location: Codable {
     let hero: Hero?
 }
 
-extension Location {
+extension HeroLocation {
     @discardableResult
     func toManagedObject(in context: NSManagedObjectContext) -> LocationDAO? {
         let entityName = LocationDAO.entityName
