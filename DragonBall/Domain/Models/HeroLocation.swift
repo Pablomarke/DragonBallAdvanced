@@ -23,22 +23,3 @@ struct HeroLocation: Codable {
     let hero: Hero?
 }
 
-extension HeroLocation {
-    @discardableResult
-    func toManagedObject(in context: NSManagedObjectContext) -> LocationDAO? {
-        let entityName = LocationDAO.entityName
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
-            NSLog("Can't create entity \(entityName)")
-            return nil
-        }
-        
-        let object = LocationDAO.init(entity: entityDescription, insertInto: context)
-        object.id = id
-        object.latitude = latitude
-        object.longitude = longitude
-        object.date = date
-        object.hero = hero?.toManagedObject(in: context)
-
-        return object
-    }
-}

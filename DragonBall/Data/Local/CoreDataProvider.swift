@@ -14,6 +14,9 @@ class CoreDataProvider {
             CoreDataStack.shared.persistentContainer.viewContext
         )
     }
+    var fetchHeroes: NSFetchRequest<HeroDAO> {
+        NSFetchRequest<HeroDAO>(entityName: HeroDAO.entityName)
+     }
     
     func createHeroes(heroes: Heroes) {
         guard let moc,
@@ -21,6 +24,7 @@ class CoreDataProvider {
                     forEntityName: HeroDAO.entityName,
                     in: moc
                 ) else { return }
+        
         for hero in heroes {
             let heroDAO = HeroDAO(entity: entityHero, 
                                   insertInto: moc)
@@ -29,7 +33,7 @@ class CoreDataProvider {
             heroDAO.setValue(hero.photo, forKey: "photo" )
             heroDAO.setValue(hero.id, forKey: "id")
             heroDAO.setValue(hero.isFavorite, forKey: "favorite")
-            heroDAO.setValue([], forKey: "locations")
+           // heroDAO.setValue([], forKey: "locations")
             try? moc.save()
         }
     }
@@ -53,23 +57,32 @@ class CoreDataProvider {
         return myHeroes.count
     }
     
+    func getHeroWithId(id: String?) -> HeroDAO? {
+        guard let idHero = id, let moc else { return nil}
+        let request = fetchHeroes
+         request.predicate = NSPredicate(format: "id = %@", idHero)
+        return try? moc.fetch(request).first
+    }
+    
 // MARK: - Localizaciones -
     func createLocations(locations: HeroLocations)  {
         guard let moc,
-                let entityLocation = NSEntityDescription.entity(
-                    forEntityName: LocationDAO.entityName,
-                    in: moc
-                ) else { return  }
+              let entityLocation = NSEntityDescription.entity(
+                forEntityName: LocationDAO.entityName,
+                in: moc
+              ) else { return  }
         
         for location in locations {
-            let locationDAO = LocationDAO(entity: entityLocation,
-                                          insertInto: moc)
-            locationDAO.setValue(location.id, forKey: "id")
-            locationDAO.setValue(location.date , forKey: "date")
-            locationDAO.setValue(location.latitude , forKey: "latitude")
-            locationDAO.setValue(location.longitude , forKey: "longitude")
-            locationDAO.setValue(location.hero , forKey: "hero")
-            try? moc.save()
+            if let hero = getHeroWithId(id: location.hero?.id ){
+                let locationDAO = LocationDAO(entity: entityLocation,  insertInto: moc)
+                
+                locationDAO.id = location.id
+                locationDAO.date = location.date
+                locationDAO.latitude = location.latitude
+                locationDAO.longitude = location.longitude
+                locationDAO.hero = hero
+                try? moc.save()
+            }
         }
     }
     

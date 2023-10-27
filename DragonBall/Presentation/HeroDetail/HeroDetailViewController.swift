@@ -63,13 +63,15 @@ class HeroDetailViewController: UIViewController {
         heroDescription.text = hero?.heroDescription
         
         for onelocation in heroLocations {
-            let annotation = HeroAnnotation(
-                title: onelocation.hero?.name,
-                info: hero?.id, 
-                coordinate: .init(
-                    latitude: Double(onelocation.latitude ?? "") ?? 0.0,
-                    longitude: Double(onelocation.longitude ?? "") ?? 0.0))
-            mapView.addAnnotation(annotation)
+            if onelocation.hero?.id == hero?.id {
+                let annotation = HeroAnnotation(
+                    title: hero?.name,
+                    info: hero?.id, 
+                    coordinate: .init(
+                        latitude: Double(onelocation.latitude ?? "") ?? 0.0,
+                        longitude: Double(onelocation.longitude ?? "") ?? 0.0))
+                mapView.addAnnotation(annotation)
+            }
         }
     }
     
