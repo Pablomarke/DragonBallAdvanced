@@ -9,7 +9,7 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
-
+    
     // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
@@ -52,10 +52,10 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         )
     }
     
-    func splashViewModel() -> SplashViewControllerDelegate? {
-        return SplashViewModel(
-            secureDataProvider: secureDataProvider,
+    func loginViewModel() -> LoginViewControllerDelegate? {
+        return LoginViewModel(
             apiProvider: apiProvider,
+            secureDataProvider: secureDataProvider,
             coreDataProvider: coreDataProvider
         )
     }

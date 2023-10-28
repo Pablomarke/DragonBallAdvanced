@@ -11,7 +11,7 @@ protocol HeroesViewControllerDelegate {
     var viewState: ((HeroesViewState) -> Void)? { get set}
     var heroesCount: Int {get}
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?
-    func splashViewModel() -> SplashViewControllerDelegate?
+    func loginViewModel() -> LoginViewControllerDelegate?
     func mapHeroesViewModel() -> MapHeroesControllerDelegate?
     func onViewappear()
     func heroBy(index: Int)  -> HeroDAO?
@@ -71,13 +71,13 @@ class HeroesViewController: UIViewController {
                 }
                 mapHeroesController.viewModel = mapHeroesViewModel
                 
-            case "HEROES_TO_SPLASHVIEW":
-                guard let splashViewController = segue.destination as? SplashViewController,
-                      let splashViewModel = viewModel?.splashViewModel() else {
+            case "HEROES_TO_LOGIN":
+                guard let loginViewController = segue.destination as? LoginViewController,
+                      let loginViewModel = viewModel?.loginViewModel() else {
                     return
                 }
                 viewModel?.logout()
-                splashViewController.viewModel = splashViewModel
+                loginViewController.viewModel = loginViewModel
                 
             default:
                 break
@@ -111,7 +111,7 @@ class HeroesViewController: UIViewController {
                                      sender: nil)
                         
                     case .logoutAndExit:
-                        self?.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
+                        self?.performSegue(withIdentifier: "HEROES_TO_LOGIN",
                                      sender: nil)
                     
                         

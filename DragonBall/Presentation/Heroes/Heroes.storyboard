@@ -96,7 +96,7 @@
                         <outlet property="mapButton" destination="FIx-he-NEs" id="sNJ-LT-bIL"/>
                         <outlet property="tableHeroes" destination="qpd-s8-Iui" id="gVa-6R-dXO"/>
                         <segue destination="OOx-Pf-X19" kind="show" identifier="HEROES_TO_DETAIL" id="fV4-g8-isQ"/>
-                        <segue destination="rEk-Q5-1MO" kind="show" identifier="HEROES_TO_SPLASHVIEW" id="pvM-Fe-z4b"/>
+                        <segue destination="rEk-Q5-1MO" kind="show" identifier="HEROES_TO_LOGIN" id="pvM-Fe-z4b"/>
                         <segue destination="Kfi-vc-bqw" kind="show" identifier="HEROES_TO_MAPHEROES" id="ax6-Oa-fu2"/>
                     </connections>
                 </viewController>
@@ -124,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="1080" y="-65"/>
         </scene>
-        <!--SplashView-->
+        <!--Main-->
         <scene sceneID="Z7s-9v-DdF">
             <objects>
-                <viewControllerPlaceholder storyboardName="SplashView" id="rEk-Q5-1MO" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Main" id="rEk-Q5-1MO" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="1UF-Yc-M01"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LgV-Xx-GBs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
