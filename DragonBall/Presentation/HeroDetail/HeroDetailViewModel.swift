@@ -6,44 +6,36 @@
 //
 
 import Foundation
+import MapKit
 
 class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
-    private let apiProvider: ApiProviderProtocol
-    private let secureDataProvider: SecureDataProviderProtocol
     private let coreDataProvider: CoreDataProvider
     var viewState: ((HeroDetailViewState) -> Void)?
     private var hero: HeroDAO
-    private var heroLocations: [LocationDAO] = []
+    private var heroLocations: [LocationDAO]
+    private var heroAnnotation: [HeroAnnotation] = []
     
     init(hero: HeroDAO,
-         apiProvider: ApiProviderProtocol,
-         secureDataProvider: SecureDataProviderProtocol,
+         heroLocations: [LocationDAO],
          coreDataProvider: CoreDataProvider
     ) {
-        self.apiProvider = apiProvider
-        self.secureDataProvider = secureDataProvider
         self.coreDataProvider = coreDataProvider 
         self.hero = hero
+        self.heroLocations = heroLocations
     }
     
     func onViewAppear() {
         viewState?(.loading(true))
-        
         DispatchQueue.global().async {
             defer {self.viewState?(.loading(false))}
-            guard let token = self.secureDataProvider.get() else {
-                return
-            }
-            
-            self.apiProvider.getLocations(
-                by: self.hero.id,
-                token: token
-            ) { [weak self] locations in
-                 self?.coreDataProvider.createLocations(locations: locations)
-                self?.heroLocations = self?.coreDataProvider.loadLocations() ?? []
-                self?.viewState?(.update(hero: self?.hero,
-                                         locations: self?.heroLocations ?? []))
-            }
+            self.loadLocations()
+
         }
+    }
+    
+    func loadLocations() {
+        self.heroLocations = self.coreDataProvider.loadLocations() 
+        self.viewState?(.update(hero: self.hero,
+                                locations: self.heroLocations ))
     }
 }

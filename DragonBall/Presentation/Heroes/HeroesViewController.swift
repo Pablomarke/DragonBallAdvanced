@@ -16,6 +16,7 @@ protocol HeroesViewControllerDelegate {
     func onViewappear()
     func heroBy(index: Int)  -> HeroDAO?
     func logout()
+    func whereIsTheHeroes()
     
 }
 
@@ -103,6 +104,7 @@ class HeroesViewController: UIViewController {
 
                     case .updateData:
                         self?.tableHeroes.reloadData()
+                        self?.viewModel?.whereIsTheHeroes()
                         
                     case .navigateToMap:
                         self?.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",

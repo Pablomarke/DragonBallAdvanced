@@ -75,7 +75,7 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="HtK-BC-8dY">
                                         <rect key="frame" x="188.66666666666666" y="429.66666666666669" width="37" height="37"/>
                                     </activityIndicatorView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmando crendenciales de login..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0p3-qy-V7c">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Llamando a los Heroes" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0p3-qy-V7c">
                                         <rect key="frame" x="0.0" y="209.66666666666663" width="414" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="ufl-Cr-5BB"/>

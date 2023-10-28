@@ -21,6 +21,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         heroes.count
     }
     private var heroes: [HeroDAO] = []
+    private var heroesLocations: [LocationDAO] = []
     
     // MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, 
@@ -37,20 +38,17 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         viewState?(.loading(true))
         DispatchQueue.main.async {
             defer { self.viewState?(.loading(false)) }
-            
             self.coreDataProvider.countHeroes() == 0 ? self.callHeroes() : self.callLocalHeroes()
         }
     }
-    
-
 
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?  {
         guard let selectedHero = heroBy(index: index) else { return nil }
     
         return HeroDetailViewModel(
-            hero: selectedHero,
-            apiProvider: apiProvider,
-            secureDataProvider: secureDataProvider, coreDataProvider: coreDataProvider
+            hero: selectedHero, 
+            heroLocations: heroesLocations,
+            coreDataProvider: coreDataProvider
         )
     }
     
@@ -65,16 +63,18 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     func mapHeroesViewModel() -> MapHeroesControllerDelegate? {
         return MapHeroesViewModel(
             heroes: self.heroes,
-            coreDataProvider: coreDataProvider,
-            apiProvider: apiProvider,
-            secureDataProvider: secureDataProvider
+            mapHeroLocations: self.heroesLocations,
+            coreDataProvider: coreDataProvider
         )
     }
     
     func callLocalHeroes() {
         self.heroes = self.coreDataProvider.loadHeroes()
         self.viewState?(.updateData)
-        print("habia")
+    }
+    
+    func whereIsTheHeroes() {
+        self.coreDataProvider.countLocations() == 0 ? self.callAndFindTheHeroes() : self.findTheHeroes()
     }
     
     func callHeroes() {
@@ -84,9 +84,27 @@ class HeroesViewModel: HeroesViewControllerDelegate {
                                    token: token) { heroes in
             self.coreDataProvider.createHeroes(heroes: heroes)
             self.heroes = self.coreDataProvider.loadHeroes()
-            print("no habia")
             self.viewState?(.updateData)
         }
+    }
+    
+    func callAndFindTheHeroes() {
+        DispatchQueue.main.async {
+            guard let token = self.secureDataProvider.get() else { return }
+            
+            let myIds = self.coreDataProvider.getAllIds()
+            for id in myIds {
+                self.apiProvider.getLocations(by: id,
+                                              token: token) { heroLocations in
+                    self.coreDataProvider.createLocations(locations: heroLocations)
+                }
+            }
+            self.heroesLocations = self.coreDataProvider.loadLocations()
+        }
+    }
+    
+    func findTheHeroes(){
+        self.heroesLocations = self.coreDataProvider.loadLocations()
     }
     
     func heroBy(index: Int)  -> HeroDAO? {

@@ -153,6 +153,7 @@
 		395D5FC72ADFD0AB00C34F7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				395D5FDE2AE1CAE600C34F7C /* MapAnnotations */,
 				395D5FC52ADF0C2C00C34F7C /* Hero.swift */,
 				395D5FDC2AE1C0CB00C34F7C /* HeroLocation.swift */,
 			);
@@ -172,7 +173,6 @@
 		395D5FD52AE1BBFC00C34F7C /* HeroDetail */ = {
 			isa = PBXGroup;
 			children = (
-				395D5FDE2AE1CAE600C34F7C /* MapAnnotations */,
 				395D5FD62AE1BC1900C34F7C /* HeroDetail.storyboard */,
 				395D5FD82AE1BC2E00C34F7C /* HeroDetailViewController.swift */,
 				395D5FDA2AE1BC4300C34F7C /* HeroDetailViewModel.swift */,

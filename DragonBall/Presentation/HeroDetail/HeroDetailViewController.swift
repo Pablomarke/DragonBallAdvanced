@@ -14,6 +14,7 @@ protocol HeroesDetailViewControllerDelegate {
     func onViewAppear()
 }
 
+// Mark: - View State -
 enum HeroDetailViewState {
     case loading(_ isLoading: Bool)
     case update(hero: HeroDAO?, locations: [LocationDAO])
@@ -21,23 +22,31 @@ enum HeroDetailViewState {
 
 class HeroDetailViewController: UIViewController {
     
-    var viewModel: HeroesDetailViewControllerDelegate?
-    
+    // MARK: - IBOutlet -
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var heroDescription: UITextView!
+    @IBOutlet weak var detailLoadView: UIView!
+    @IBOutlet weak var labelLoadView: UILabel!
     
+    // MARK - Public properties -
+    var viewModel: HeroesDetailViewControllerDelegate?
+    
+    // MARK: - lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        viewModel?.onViewAppear()
         initViews()
         setObservers()
-        viewModel?.onViewAppear()
+        
     }
     
+    // MARK: - Private Functions -
     private func initViews() {
         mapView.delegate = self
+        
     }
     
     private func setObservers(){
@@ -45,7 +54,8 @@ class HeroDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 switch state {
                     case .loading(let isLoading):
-                        break
+                        self?.labelLoadView.text = "Buscando a..."
+                        self?.detailLoadView.isHidden = !isLoading
                         
                     case .update(let heroDAO, let heroLocations):
                         self?.updateViews(hero: heroDAO,
@@ -57,7 +67,7 @@ class HeroDetailViewController: UIViewController {
     
     private func updateViews(hero: HeroDAO?, heroLocations: [LocationDAO]) {
         photoView.kf.setImage(with: URL(string: hero?.photo ?? ""))
-        makeRounded(image: photoView)
+        photoView.makeRounded(image: self.photoView)
 
         nameLabel.text = hero?.name
         heroDescription.text = hero?.heroDescription
@@ -73,15 +83,6 @@ class HeroDetailViewController: UIViewController {
                 mapView.addAnnotation(annotation)
             }
         }
-    }
-    
-    // TODO: sacarlo a una extension
-    private func makeRounded(image: UIImageView) {
-        image.layer.borderWidth = 1
-        image.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.6)
-        image.layer.cornerRadius = image.frame.height / 2
-        image.layer.masksToBounds = false
-        image.clipsToBounds = true
     }
 }
 //MARK: — MKMapView Delegate Methods

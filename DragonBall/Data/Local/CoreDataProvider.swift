@@ -34,7 +34,7 @@ class CoreDataProvider {
             heroDAO.setValue(hero.id, forKey: "id")
             heroDAO.setValue(hero.isFavorite, forKey: "favorite")
            // heroDAO.setValue([], forKey: "locations")
-            try? moc.save()
+            try? moc.save() /// Debería estar fuera del bucle este save, pero dejandolo aquí respeta el orden de la api.
         }
     }
     

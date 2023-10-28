@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         case password
     }
     
-    // Mark: - lifecycle -
+    // MARK: - lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()

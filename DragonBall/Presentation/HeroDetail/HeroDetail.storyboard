@@ -47,6 +47,31 @@
                                 <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8C-SJ-EDi">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="R3T-Y7-PPL">
+                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCJ-s7-8pv">
+                                        <rect key="frame" x="0.0" y="247.66666666666663" width="393" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="D8l-t1-DiT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="24"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GCJ-s7-8pv" secondAttribute="trailing" id="DNo-r1-tiR"/>
+                                    <constraint firstItem="R3T-Y7-PPL" firstAttribute="top" secondItem="GCJ-s7-8pv" secondAttribute="bottom" constant="100" id="I31-6E-BTx"/>
+                                    <constraint firstItem="GCJ-s7-8pv" firstAttribute="leading" secondItem="A8C-SJ-EDi" secondAttribute="leading" id="Icd-WU-vyq"/>
+                                    <constraint firstItem="R3T-Y7-PPL" firstAttribute="centerY" secondItem="A8C-SJ-EDi" secondAttribute="centerY" id="QAT-XD-Y5p"/>
+                                    <constraint firstItem="R3T-Y7-PPL" firstAttribute="centerX" secondItem="A8C-SJ-EDi" secondAttribute="centerX" id="sXD-FI-rfd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -55,18 +80,24 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8W2-c7-JOe" secondAttribute="trailing" constant="16" id="4nW-cM-bUO"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pLh-Rc-fKL" secondAttribute="trailing" constant="16" id="EcR-TU-fIt"/>
                             <constraint firstItem="TzY-xg-gfZ" firstAttribute="top" secondItem="oDQ-EN-6Sz" secondAttribute="bottom" constant="20" id="HmU-Ee-hG4"/>
+                            <constraint firstItem="A8C-SJ-EDi" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JNw-3e-494"/>
                             <constraint firstItem="pLh-Rc-fKL" firstAttribute="bottom" secondItem="oDQ-EN-6Sz" secondAttribute="bottom" id="KzW-1h-A2k"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="8W2-c7-JOe" secondAttribute="bottom" constant="8" id="N7h-ug-H1h"/>
+                            <constraint firstAttribute="bottom" secondItem="A8C-SJ-EDi" secondAttribute="bottom" id="NHK-Pc-eBA"/>
                             <constraint firstItem="8W2-c7-JOe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Th4-QS-YCH"/>
                             <constraint firstItem="oDQ-EN-6Sz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Uw0-93-MyB"/>
                             <constraint firstItem="oDQ-EN-6Sz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XBD-PJ-RYG"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TzY-xg-gfZ" secondAttribute="trailing" constant="16" id="arB-54-APd"/>
+                            <constraint firstItem="A8C-SJ-EDi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="cC4-EU-rsy"/>
                             <constraint firstItem="TzY-xg-gfZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="sop-cj-pIz"/>
                             <constraint firstItem="oDQ-EN-6Sz" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="v6B-3d-jXK"/>
+                            <constraint firstItem="A8C-SJ-EDi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yZP-SR-grF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailLoadView" destination="A8C-SJ-EDi" id="uIy-fv-4zR"/>
                         <outlet property="heroDescription" destination="8W2-c7-JOe" id="CDU-1d-vdT"/>
+                        <outlet property="labelLoadView" destination="GCJ-s7-8pv" id="cFg-vO-sNc"/>
                         <outlet property="mapView" destination="oDQ-EN-6Sz" id="wy4-xo-ruS"/>
                         <outlet property="nameLabel" destination="TzY-xg-gfZ" id="qIa-zD-avm"/>
                         <outlet property="photoView" destination="pLh-Rc-fKL" id="fcB-2o-tAr"/>
