@@ -17,7 +17,7 @@ protocol HeroesDetailViewControllerDelegate {
 // Mark: - View State -
 enum HeroDetailViewState {
     case loading(_ isLoading: Bool)
-    case update(hero: HeroDAO?, locations: [LocationDAO])
+    case update(hero: HeroDAO?, locations: [HeroAnnotation])
 }
 
 class HeroDetailViewController: UIViewController {
@@ -65,23 +65,14 @@ class HeroDetailViewController: UIViewController {
         }
     }
     
-    private func updateViews(hero: HeroDAO?, heroLocations: [LocationDAO]) {
+    private func updateViews(hero: HeroDAO?, heroLocations: [HeroAnnotation]) {
         photoView.kf.setImage(with: URL(string: hero?.photo ?? ""))
         photoView.makeRounded(image: self.photoView)
 
         nameLabel.text = hero?.name
         heroDescription.text = hero?.heroDescription
-        
-        for onelocation in heroLocations {
-            if onelocation.hero?.id == hero?.id {
-                let annotation = HeroAnnotation(
-                    title: hero?.name,
-                    info: hero?.id, 
-                    coordinate: .init(
-                        latitude: Double(onelocation.latitude ?? "") ?? 0.0,
-                        longitude: Double(onelocation.longitude ?? "") ?? 0.0))
-                mapView.addAnnotation(annotation)
-            }
+        heroLocations.forEach { mapView.addAnnotation($0)
+            
         }
     }
 }
