@@ -29,6 +29,7 @@
 		399EA9542ADA9BCB0045B16D /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 399EA9532ADA9BCB0045B16D /* KeychainSwift */; };
 		399EA9562ADA9CD70045B16D /* SecureDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EA9552ADA9CD70045B16D /* SecureDataProvider.swift */; };
 		399EA9582ADA9F960045B16D /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EA9572ADA9F960045B16D /* ApiProvider.swift */; };
+		39B2CABE2AED0CE700AAFB0E /* ExtensionUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B2CABD2AED0CE700AAFB0E /* ExtensionUIImage.swift */; };
 		39BC50042AE53D01004B218B /* MapHeroesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC50032AE53D01004B218B /* MapHeroesController.swift */; };
 		39BC50062AE53D26004B218B /* MapHeroesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BC50052AE53D26004B218B /* MapHeroesViewModel.swift */; };
 		39BC50082AE53D3C004B218B /* MapHeroes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BC50072AE53D3C004B218B /* MapHeroes.storyboard */; };
@@ -83,6 +84,7 @@
 		3978BB722ADDD5650046C7B3 /* HeroesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesViewModel.swift; sourceTree = "<group>"; };
 		399EA9552ADA9CD70045B16D /* SecureDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProvider.swift; sourceTree = "<group>"; };
 		399EA9572ADA9F960045B16D /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		39B2CABD2AED0CE700AAFB0E /* ExtensionUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIImage.swift; sourceTree = "<group>"; };
 		39BC50032AE53D01004B218B /* MapHeroesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeroesController.swift; sourceTree = "<group>"; };
 		39BC50052AE53D26004B218B /* MapHeroesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHeroesViewModel.swift; sourceTree = "<group>"; };
 		39BC50072AE53D3C004B218B /* MapHeroes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapHeroes.storyboard; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		395D5FC42ADF0C1200C34F7C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				39B2CABF2AED0CF200AAFB0E /* Extensions */,
 				395D5FC72ADFD0AB00C34F7C /* Models */,
 			);
 			path = Domain;
@@ -203,6 +206,14 @@
 				395D5FCB2AE0367500C34F7C /* HeroCellView.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		39B2CABF2AED0CF200AAFB0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				39B2CABD2AED0CE700AAFB0E /* ExtensionUIImage.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		39BC50022AE53CD2004B218B /* MapHeroes */ = {
@@ -493,6 +504,7 @@
 				395D5FD92AE1BC2E00C34F7C /* HeroDetailViewController.swift in Sources */,
 				3914911B2AE6F34E0085378E /* CoreDataProvider.swift in Sources */,
 				395D5FC12ADF02D100C34F7C /* HeroDAO.swift in Sources */,
+				39B2CABE2AED0CE700AAFB0E /* ExtensionUIImage.swift in Sources */,
 				39DC250D2AD71A61005416C0 /* AppDelegate.swift in Sources */,
 				391491192AE6F1DE0085378E /* LocationDAO.swift in Sources */,
 				39DC25472AD725F7005416C0 /* LoginViewModel.swift in Sources */,
