@@ -8,44 +8,42 @@
 import Foundation
 
 class MapHeroesViewModel: MapHeroesControllerDelegate {
-    private let apiProvider: ApiProviderProtocol
-    private let secureDataProvider: SecureDataProviderProtocol
     private let coreDataProvider: CoreDataProvider
     
     var viewState: ((MapViewState) -> Void)?
-    private var mapHeroLocations: [LocationDAO] = []
+    private var mapHeroLocations: [LocationDAO]
     private var heroes: [HeroDAO]
+    private var mapAnnotations: [HeroAnnotation] = []
     
     init(heroes: [HeroDAO],
-         coreDataProvider: CoreDataProvider,
-         apiProvider: ApiProviderProtocol,
-         secureDataProvider: SecureDataProviderProtocol
+         mapHeroLocations: [LocationDAO] ,
+         coreDataProvider: CoreDataProvider
     ) {
-        self.apiProvider = apiProvider
-        self.secureDataProvider = secureDataProvider
         self.coreDataProvider = coreDataProvider
         self.heroes = heroes
+        self.mapHeroLocations = mapHeroLocations
     }
     
     func onViewappear() {
         viewState?(.loading(true))
         
-        //estaba en global()
         DispatchQueue.main.async {
             defer {self.viewState?(.loading(false))}
-            
-            // TODO: volcar las localizaciones de heroe
-            guard let token = self.secureDataProvider.get() else { return }
-            let myIds = self.coreDataProvider.getAllIds()
-            for id in myIds {
-                self.apiProvider.getLocations(by: id, 
-                                              token: token) { heroLocations in
-                    self.coreDataProvider.createLocations(locations: heroLocations)
-                }
-            }
             self.mapHeroLocations = self.coreDataProvider.loadLocations()
-            print("Localizaciones en mapa: \(self.mapHeroLocations.count)")
-            self.viewState?(.updateMap(locations: self.mapHeroLocations))
+            self.mapAnnotations = self.createAnnotations(locations: self.mapHeroLocations)
+            self.viewState?(.updateMap(locations: self.mapAnnotations))
         }
+    }
+    
+    func createAnnotations(locations: [LocationDAO]) -> [HeroAnnotation] {
+        var allMapsAnnotations: [HeroAnnotation] =  []
+        locations.forEach { allMapsAnnotations.append( HeroAnnotation(
+            title: $0.hero?.name,
+            info: $0.hero?.id,
+            coordinate: .init(
+                latitude: Double($0.latitude ?? "") ?? 0.0,
+                longitude: Double($0.longitude ?? "") ?? 0.0)))
+        }
+        return allMapsAnnotations
     }
 }

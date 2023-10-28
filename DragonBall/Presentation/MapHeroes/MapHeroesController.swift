@@ -14,7 +14,7 @@ protocol MapHeroesControllerDelegate {
 }
 
 enum MapViewState {
-    case updateMap(locations: [LocationDAO])
+    case updateMap(locations: [HeroAnnotation])
     case loading(_ isLoading: Bool)
 }
 
@@ -52,25 +52,15 @@ class MapHeroesController: UIViewController {
                         self?.updateMap(mapHeroLocations: mapHeroLocations )
                         
                     case .loading(_):
+                        //TODO
                         break
                 }
             }
         }
     }
     
-    private func updateMap(mapHeroLocations: [LocationDAO]) {
-        mapHeroLocations.forEach {
-            var count = 0
-            count += 1
-            heroesMap.addAnnotation(
-                HeroAnnotation(
-                    title: $0.hero?.name,
-                    info: $0.hero?.id,
-                coordinate: .init(
-                    latitude: Double($0.latitude ?? "") ?? 0.0,
-                    longitude: Double($0.longitude ?? "") ?? 0.0)
-                )
-            )
+    private func updateMap(mapHeroLocations: [HeroAnnotation]) {
+        mapHeroLocations.forEach { heroesMap.addAnnotation($0)
         }
     }
 }
