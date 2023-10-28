@@ -16,12 +16,14 @@ protocol HeroesViewControllerDelegate {
     func onViewappear()
     func heroBy(index: Int)  -> HeroDAO?
     func logout()
+    
 }
 
 enum HeroesViewState {
     case loading (_ isLoading: Bool)
     case updateData
     case navigateToMap
+    case navigateToDetail(index: Int)
     case logoutAndExit
 }
 
@@ -31,6 +33,7 @@ class HeroesViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var loadLabel: UILabel!
     
     // MARK: - Public Properties -
     var viewModel: HeroesViewControllerDelegate?
@@ -42,6 +45,7 @@ class HeroesViewController: UIViewController {
         setObservers()
         viewModel?.onViewappear()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true,
@@ -58,11 +62,6 @@ class HeroesViewController: UIViewController {
                     return
                 }
                 heroDetailViewController.viewModel = detailViewModel
-                // TODO: sacar esta logica a una funcion o extension
-                let backItem = UIBarButtonItem()
-                backItem.title = "Heroes"
-                backItem.tintColor = .orange
-                navigationItem.backBarButtonItem = backItem
                 
             case "HEROES_TO_MAPHEROES":
                 guard let mapHeroesController = segue.destination as? MapHeroesController,
@@ -71,12 +70,12 @@ class HeroesViewController: UIViewController {
                 }
                 mapHeroesController.viewModel = mapHeroesViewModel
                 
-                
             case "HEROES_TO_SPLASHVIEW":
                 guard let splashViewController = segue.destination as? SplashViewController,
                       let splashViewModel = viewModel?.splashViewModel() else {
                     return
                 }
+                viewModel?.logout()
                 splashViewController.viewModel = splashViewModel
                 
             default:
@@ -92,6 +91,7 @@ class HeroesViewController: UIViewController {
             UINib(nibName: HeroCellView.identifier, bundle: nil),
             forCellReuseIdentifier: HeroCellView.identifier
         )
+        changeBackButton()
     }
     
     private func setObservers() {
@@ -111,14 +111,26 @@ class HeroesViewController: UIViewController {
                     case .logoutAndExit:
                         self?.performSegue(withIdentifier: "HEROES_TO_SPLASHVIEW",
                                      sender: nil)
+                    
+                        
+                    case .navigateToDetail(index: let index):
+                        self?.performSegue(withIdentifier: "HEROES_TO_DETAIL",
+                                     sender: index)
                 }
             }
         }
     }
     
+    private func changeBackButton(){
+        let backItem = UIBarButtonItem()
+        backItem.title = "Heroes"
+        backItem.tintColor = .orange
+        navigationItem.backBarButtonItem = backItem
+    }
+    
     // MARK: - IBActions -
     @IBAction func logoutAction(_ sender: Any) {
-        viewModel?.logout()
+        viewModel?.viewState?(.logoutAndExit)
     }
     
     @IBAction func mapAction(_ sender: Any) {
@@ -126,7 +138,8 @@ class HeroesViewController: UIViewController {
     }
 }
 
-extension HeroesViewController: UITableViewDelegate, 
+// MARK: - Table View Data Source y Delegate-
+extension HeroesViewController: UITableViewDelegate,
                                     UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
@@ -164,7 +177,6 @@ extension HeroesViewController: UITableViewDelegate,
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        self.performSegue(withIdentifier: "HEROES_TO_DETAIL",
-                     sender: indexPath.row)
+        viewModel?.viewState?(.navigateToDetail(index: indexPath.row))
     }
 }

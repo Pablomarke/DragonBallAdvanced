@@ -52,11 +52,23 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="nt2-8Y-XGI">
                                         <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                                     </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Despertando a Goku de su siesta trás comer..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYo-KH-tux">
+                                        <rect key="frame" x="0.0" y="187.66666666666666" width="393" height="119.99999999999997"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="tVV-k8-XRo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="24"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="nt2-8Y-XGI" firstAttribute="top" secondItem="lYo-KH-tux" secondAttribute="bottom" constant="100" id="Gv9-47-cWc"/>
                                     <constraint firstItem="nt2-8Y-XGI" firstAttribute="centerY" secondItem="OlP-B8-KSw" secondAttribute="centerY" id="N9Q-g2-lpz"/>
                                     <constraint firstItem="nt2-8Y-XGI" firstAttribute="centerX" secondItem="OlP-B8-KSw" secondAttribute="centerX" id="a1h-hs-GFL"/>
+                                    <constraint firstItem="lYo-KH-tux" firstAttribute="leading" secondItem="OlP-B8-KSw" secondAttribute="leading" id="ocJ-yf-gSF"/>
+                                    <constraint firstAttribute="trailing" secondItem="lYo-KH-tux" secondAttribute="trailing" id="rpO-Cc-PWI"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -78,6 +90,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadLabel" destination="lYo-KH-tux" id="DF8-jT-iDl"/>
                         <outlet property="loadingView" destination="OlP-B8-KSw" id="psn-gV-hTK"/>
                         <outlet property="logoutButton" destination="ZXH-4J-mnq" id="9VM-WO-rbl"/>
                         <outlet property="mapButton" destination="FIx-he-NEs" id="sNJ-LT-bIL"/>

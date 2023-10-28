@@ -35,7 +35,6 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     // MARK: - Public functions -
     func onViewappear() {
         viewState?(.loading(true))
-        
         DispatchQueue.main.async {
             defer { self.viewState?(.loading(false)) }
             
@@ -43,13 +42,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         }
     }
     
-    func heroBy(index: Int)  -> HeroDAO? {
-        if index >= 0 && index < heroesCount {
-            heroes[index]
-        } else {
-            nil
-        }
-    }
+
 
     func heroDetailViewModel(index: Int) -> HeroesDetailViewControllerDelegate?  {
         guard let selectedHero = heroBy(index: index) else { return nil }
@@ -95,10 +88,16 @@ class HeroesViewModel: HeroesViewControllerDelegate {
             self.viewState?(.updateData)
         }
     }
+    
+    func heroBy(index: Int)  -> HeroDAO? {
+        if index >= 0 && index < heroesCount {
+            heroes[index]
+        } else {
+            nil
+        }
+    }
+    
     func logout() {
         secureDataProvider.delete()
-        DispatchQueue.main.async {
-            self.viewState?(.logoutAndExit)
-        }
     }
 }
