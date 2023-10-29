@@ -63,11 +63,12 @@ class CoreDataProvider {
         return try? moc.fetch(request).first
     }
     
-    func getHerowithName(name: String?) -> HeroDAO? {
-        guard let nameHero = name, let moc else { return nil}
+    func getHerowithName(name: String?) -> [HeroDAO]? {
+        guard let nameHero = name, let moc else { return nil }
         let request = fetchHeroes
         request.predicate = NSPredicate(format: "name = %@", nameHero)
-        return try? moc.fetch(request).first
+        let myHeroes = try? moc.fetch(request)
+        return myHeroes
     }
     
     func getAllIds() -> [String] {
@@ -156,7 +157,7 @@ class CoreDataProvider {
     
     func deleteBug(){
         guard let moc,
-              let bug = getHerowithName(name: "Quake (Daisy Johnson)")
+              let bug = getHerowithName(name: "Quake (Daisy Johnson)")?.first
         else {
             return
         }

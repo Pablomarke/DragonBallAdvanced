@@ -18,7 +18,7 @@ protocol HeroesViewControllerDelegate {
     func logout()
     func whereIsTheHeroes()
     func destroyData()
-    
+    func searchHero(text: String)
 }
 
 enum HeroesViewState {
@@ -28,6 +28,7 @@ enum HeroesViewState {
     case navigateToDetail(index: Int)
     case logoutAndExit
     case noHero
+    case searchHero
 }
 
 class HeroesViewController: UIViewController {
@@ -39,6 +40,7 @@ class HeroesViewController: UIViewController {
     @IBOutlet weak var loadLabel: UILabel!
     @IBOutlet weak var destroyButton: UIButton!
     @IBOutlet weak var bottomTable: NSLayoutConstraint!
+    @IBOutlet weak var searchField: UITextField!
     
     // MARK: - Public Properties -
     var viewModel: HeroesViewControllerDelegate?
@@ -127,6 +129,11 @@ class HeroesViewController: UIViewController {
                         self?.viewModel?.destroyData()
                         self?.loadingView.isHidden = false
                         self?.tableHeroes.reloadData()
+                    
+                    case .searchHero:
+                        self?.viewModel?.searchHero(text: self?.searchField.text ?? "")
+                        self?.tableHeroes.reloadData()
+                        self?.destroyButton.isHidden = true
                 }
             }
         }
@@ -149,6 +156,10 @@ class HeroesViewController: UIViewController {
     }
     @IBAction func destroyButtonAction(_ sender: Any) {
         viewModel?.viewState?(.noHero)
+    }
+    
+    @IBAction func seekerButton(_ sender: Any) {
+        viewModel?.viewState?(.searchHero)
     }
 }
 

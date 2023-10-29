@@ -42,8 +42,40 @@
                                     <action selector="mapAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aZa-1E-kgT"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6r-O4-ooa">
+                                <rect key="frame" x="0.0" y="95" width="393" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Busca un heroe..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNd-r8-M08">
+                                        <rect key="frame" x="6" y="0.0" width="323.33333333333331" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGd-qm-HdU">
+                                        <rect key="frame" x="337.33333333333331" y="0.0" width="49.666666666666686" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="xqc-Hg-dlq"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="magnifyingglass" catalog="system">
+                                            <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="seekerButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="EA0-E5-918"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="qGd-qm-HdU" secondAttribute="trailing" constant="6" id="9SK-wf-fGu"/>
+                                    <constraint firstItem="qGd-qm-HdU" firstAttribute="leading" secondItem="cNd-r8-M08" secondAttribute="trailing" constant="8" id="BNz-tl-mtM"/>
+                                    <constraint firstItem="cNd-r8-M08" firstAttribute="leading" secondItem="G6r-O4-ooa" secondAttribute="leading" constant="6" id="Lcm-qM-Coo"/>
+                                    <constraint firstAttribute="bottom" secondItem="qGd-qm-HdU" secondAttribute="bottom" constant="8" id="MOw-3W-FIO"/>
+                                    <constraint firstAttribute="bottom" secondItem="cNd-r8-M08" secondAttribute="bottom" constant="6" id="qjy-zm-8Ox"/>
+                                    <constraint firstAttribute="height" constant="40" id="yeI-k1-dq5"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="256" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qpd-s8-Iui">
-                                <rect key="frame" x="0.0" y="91" width="393" height="761"/>
+                                <rect key="frame" x="0.0" y="141" width="393" height="711"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qk-3w-sfu">
@@ -85,16 +117,19 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G6r-O4-ooa" secondAttribute="trailing" id="0zQ-dY-lU5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4Qk-3w-sfu" secondAttribute="bottom" id="Cnq-zc-tWn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Qk-3w-sfu" secondAttribute="trailing" constant="56" id="CpD-Vh-8j9"/>
+                            <constraint firstItem="qpd-s8-Iui" firstAttribute="top" secondItem="G6r-O4-ooa" secondAttribute="bottom" constant="6" id="FBy-lN-FkY"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="160" id="JAE-Ar-HSb"/>
                             <constraint firstAttribute="bottom" secondItem="OlP-B8-KSw" secondAttribute="bottom" constant="160" id="KDj-Aj-6Jw"/>
+                            <constraint firstItem="G6r-O4-ooa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MMJ-4C-nkM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qpd-s8-Iui" secondAttribute="trailing" id="MfY-cp-4W8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FIx-he-NEs" secondAttribute="trailing" constant="16" id="QnG-uI-hRh"/>
                             <constraint firstItem="ZXH-4J-mnq" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" id="SVu-Gn-1Qt"/>
-                            <constraint firstItem="qpd-s8-Iui" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="32" id="TRg-7Z-1nN"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Yan-bl-nar"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="b4j-i7-W8b"/>
+                            <constraint firstItem="G6r-O4-ooa" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="36" id="hnC-OV-pzw"/>
                             <constraint firstItem="4Qk-3w-sfu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="56" id="icg-PE-7LG"/>
                             <constraint firstItem="ZXH-4J-mnq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="lCW-zj-ktu"/>
                             <constraint firstItem="FIx-he-NEs" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lOy-H1-cwo"/>
@@ -109,6 +144,7 @@
                         <outlet property="loadingView" destination="OlP-B8-KSw" id="psn-gV-hTK"/>
                         <outlet property="logoutButton" destination="ZXH-4J-mnq" id="9VM-WO-rbl"/>
                         <outlet property="mapButton" destination="FIx-he-NEs" id="sNJ-LT-bIL"/>
+                        <outlet property="searchField" destination="cNd-r8-M08" id="OuZ-KS-Ag1"/>
                         <outlet property="tableHeroes" destination="qpd-s8-Iui" id="gVa-6R-dXO"/>
                         <segue destination="OOx-Pf-X19" kind="show" identifier="HEROES_TO_DETAIL" id="fV4-g8-isQ"/>
                         <segue destination="rEk-Q5-1MO" kind="show" identifier="HEROES_TO_LOGIN" id="pvM-Fe-z4b"/>
@@ -151,6 +187,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="power.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">

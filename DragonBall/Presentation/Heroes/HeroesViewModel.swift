@@ -126,4 +126,9 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         coreDataProvider.deleteLocations()
     }
     
+    func searchHero(text: String) {
+        let searchHero = self.coreDataProvider.getHerowithName(name: text) ?? []
+        self.heroes = []
+        self.heroes.append(contentsOf: searchHero)
+    }
 }
