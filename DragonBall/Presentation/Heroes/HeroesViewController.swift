@@ -125,6 +125,7 @@ class HeroesViewController: UIViewController {
                                            sender: index)
                     case .noHero:
                         self?.viewModel?.destroyData()
+                        self?.loadingView.isHidden = false
                         self?.tableHeroes.reloadData()
                 }
             }
@@ -147,7 +148,6 @@ class HeroesViewController: UIViewController {
         viewModel?.viewState?(.navigateToMap)
     }
     @IBAction func destroyButtonAction(_ sender: Any) {
-        
         viewModel?.viewState?(.noHero)
     }
 }
@@ -194,7 +194,9 @@ extension HeroesViewController: UITableViewDelegate,
         viewModel?.viewState?(.navigateToDetail(index: indexPath.row))
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(
+        _ scrollView: UIScrollView
+    ) {
         let offsetY = scrollView.contentOffset.y + 30
         let contentHeight = scrollView.contentSize.height
         let visibleHeight = scrollView.frame.size.height

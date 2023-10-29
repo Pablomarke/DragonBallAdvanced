@@ -131,7 +131,7 @@ class CoreDataProvider {
     
     // MARK: - Funciones de Borrado -
     func deleteHeroes() {
-        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
+       let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
         guard let moc,
               let myHeroes = try? moc.fetch(fetchHero)
         else {
@@ -139,7 +139,7 @@ class CoreDataProvider {
         }
         myHeroes.forEach { moc.delete($0)}
         try? moc.save()
-        print("Heroes en base de datos despues del borrado: \(myHeroes.count )")
+        print("Heroes en base de datos despues del borrado: \(moc.registeredObjects.count)")
     }
     
     func deleteLocations() {
@@ -151,7 +151,7 @@ class CoreDataProvider {
         }
         myLocations.forEach { moc.delete($0)}
         try? moc.save()
-        print("Localizaciones en base de datos despues del borrado: \(myLocations.count )")
+        print("Localizaciones en base de datos despues del borrado: \(moc.registeredObjects.count)")
     }
     
     func deleteBug(){

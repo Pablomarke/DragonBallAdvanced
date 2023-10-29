@@ -61,13 +61,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlP-B8-KSw">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <rect key="frame" x="0.0" y="160" width="393" height="532"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="nt2-8Y-XGI">
-                                        <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Despertando a Goku de su siesta trás comer..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYo-KH-tux">
-                                        <rect key="frame" x="0.0" y="187.66666666666666" width="393" height="119.99999999999997"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No hay datos que mostrar. Vuelva a logearse." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYo-KH-tux">
+                                        <rect key="frame" x="0.0" y="206" width="393" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="tVV-k8-XRo"/>
                                         </constraints>
@@ -78,11 +75,10 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="nt2-8Y-XGI" firstAttribute="top" secondItem="lYo-KH-tux" secondAttribute="bottom" constant="100" id="Gv9-47-cWc"/>
-                                    <constraint firstItem="nt2-8Y-XGI" firstAttribute="centerY" secondItem="OlP-B8-KSw" secondAttribute="centerY" id="N9Q-g2-lpz"/>
-                                    <constraint firstItem="nt2-8Y-XGI" firstAttribute="centerX" secondItem="OlP-B8-KSw" secondAttribute="centerX" id="a1h-hs-GFL"/>
+                                    <constraint firstItem="lYo-KH-tux" firstAttribute="centerX" secondItem="OlP-B8-KSw" secondAttribute="centerX" id="dQD-2T-cCH"/>
                                     <constraint firstItem="lYo-KH-tux" firstAttribute="leading" secondItem="OlP-B8-KSw" secondAttribute="leading" id="ocJ-yf-gSF"/>
                                     <constraint firstAttribute="trailing" secondItem="lYo-KH-tux" secondAttribute="trailing" id="rpO-Cc-PWI"/>
+                                    <constraint firstItem="lYo-KH-tux" firstAttribute="centerY" secondItem="OlP-B8-KSw" secondAttribute="centerY" id="sqx-Xg-uFa"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -91,13 +87,13 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4Qk-3w-sfu" secondAttribute="bottom" id="Cnq-zc-tWn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Qk-3w-sfu" secondAttribute="trailing" constant="56" id="CpD-Vh-8j9"/>
+                            <constraint firstItem="OlP-B8-KSw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="160" id="JAE-Ar-HSb"/>
+                            <constraint firstAttribute="bottom" secondItem="OlP-B8-KSw" secondAttribute="bottom" constant="160" id="KDj-Aj-6Jw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qpd-s8-Iui" secondAttribute="trailing" id="MfY-cp-4W8"/>
-                            <constraint firstItem="OlP-B8-KSw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="PxO-hS-Ll2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FIx-he-NEs" secondAttribute="trailing" constant="16" id="QnG-uI-hRh"/>
                             <constraint firstItem="ZXH-4J-mnq" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" id="SVu-Gn-1Qt"/>
                             <constraint firstItem="qpd-s8-Iui" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="32" id="TRg-7Z-1nN"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Yan-bl-nar"/>
-                            <constraint firstAttribute="bottom" secondItem="OlP-B8-KSw" secondAttribute="bottom" id="ahL-Vz-CxL"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="b4j-i7-W8b"/>
                             <constraint firstItem="4Qk-3w-sfu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="56" id="icg-PE-7LG"/>
                             <constraint firstItem="ZXH-4J-mnq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="lCW-zj-ktu"/>
