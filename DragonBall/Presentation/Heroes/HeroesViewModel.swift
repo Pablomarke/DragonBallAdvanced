@@ -9,6 +9,7 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
+
 // MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
@@ -119,4 +120,10 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     func logout() {
         secureDataProvider.delete()
     }
+    
+    func destroyData() {
+        coreDataProvider.deleteHeroes()
+        coreDataProvider.deleteLocations()
+    }
+    
 }

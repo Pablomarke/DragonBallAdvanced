@@ -46,6 +46,20 @@
                                 <rect key="frame" x="0.0" y="91" width="393" height="761"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qk-3w-sfu">
+                                <rect key="frame" x="56" y="778" width="281" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="pra-kX-Sb0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Borrar Heroes">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="destroyButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="yKV-3i-hRf"/>
+                                </connections>
+                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlP-B8-KSw">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
@@ -75,6 +89,8 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4Qk-3w-sfu" secondAttribute="bottom" id="Cnq-zc-tWn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Qk-3w-sfu" secondAttribute="trailing" constant="56" id="CpD-Vh-8j9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qpd-s8-Iui" secondAttribute="trailing" id="MfY-cp-4W8"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="PxO-hS-Ll2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FIx-he-NEs" secondAttribute="trailing" constant="16" id="QnG-uI-hRh"/>
@@ -83,6 +99,7 @@
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Yan-bl-nar"/>
                             <constraint firstAttribute="bottom" secondItem="OlP-B8-KSw" secondAttribute="bottom" id="ahL-Vz-CxL"/>
                             <constraint firstItem="OlP-B8-KSw" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="b4j-i7-W8b"/>
+                            <constraint firstItem="4Qk-3w-sfu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="56" id="icg-PE-7LG"/>
                             <constraint firstItem="ZXH-4J-mnq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="lCW-zj-ktu"/>
                             <constraint firstItem="FIx-he-NEs" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="lOy-H1-cwo"/>
                             <constraint firstAttribute="bottom" secondItem="qpd-s8-Iui" secondAttribute="bottom" id="o5a-KE-CLZ"/>
@@ -90,6 +107,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomTable" destination="o5a-KE-CLZ" id="YLZ-Ev-VpU"/>
+                        <outlet property="destroyButton" destination="4Qk-3w-sfu" id="viX-bG-Wpc"/>
                         <outlet property="loadLabel" destination="lYo-KH-tux" id="DF8-jT-iDl"/>
                         <outlet property="loadingView" destination="OlP-B8-KSw" id="psn-gV-hTK"/>
                         <outlet property="logoutButton" destination="ZXH-4J-mnq" id="9VM-WO-rbl"/>
@@ -142,7 +161,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

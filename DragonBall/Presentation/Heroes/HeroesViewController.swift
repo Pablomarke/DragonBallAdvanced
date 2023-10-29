@@ -17,6 +17,7 @@ protocol HeroesViewControllerDelegate {
     func heroBy(index: Int)  -> HeroDAO?
     func logout()
     func whereIsTheHeroes()
+    func destroyData()
     
 }
 
@@ -26,6 +27,7 @@ enum HeroesViewState {
     case navigateToMap
     case navigateToDetail(index: Int)
     case logoutAndExit
+    case noHero
 }
 
 class HeroesViewController: UIViewController {
@@ -35,6 +37,8 @@ class HeroesViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var loadLabel: UILabel!
+    @IBOutlet weak var destroyButton: UIButton!
+    @IBOutlet weak var bottomTable: NSLayoutConstraint!
     
     // MARK: - Public Properties -
     var viewModel: HeroesViewControllerDelegate?
@@ -88,6 +92,7 @@ class HeroesViewController: UIViewController {
     private func initViews() {
         tableHeroes.dataSource = self
         tableHeroes.delegate = self
+        tableHeroes.bounces = false
         tableHeroes.register(
             UINib(nibName: HeroCellView.identifier, bundle: nil),
             forCellReuseIdentifier: HeroCellView.identifier
@@ -118,6 +123,9 @@ class HeroesViewController: UIViewController {
                     case .navigateToDetail(index: let index):
                         self?.performSegue(withIdentifier: "HEROES_TO_DETAIL",
                                            sender: index)
+                    case .noHero:
+                        self?.viewModel?.destroyData()
+                        self?.tableHeroes.reloadData()
                 }
             }
         }
@@ -137,6 +145,10 @@ class HeroesViewController: UIViewController {
     
     @IBAction func mapAction(_ sender: Any) {
         viewModel?.viewState?(.navigateToMap)
+    }
+    @IBAction func destroyButtonAction(_ sender: Any) {
+        
+        viewModel?.viewState?(.noHero)
     }
 }
 
@@ -181,4 +193,19 @@ extension HeroesViewController: UITableViewDelegate,
     ) {
         viewModel?.viewState?(.navigateToDetail(index: indexPath.row))
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y + 30
+        let contentHeight = scrollView.contentSize.height
+        let visibleHeight = scrollView.frame.size.height
+        
+        if offsetY > 0 && offsetY + 50 + visibleHeight  >= contentHeight  {
+            self.bottomTable.constant = 94
+            self.destroyButton.isHidden = false
+        } else {
+            self.bottomTable.constant = 0
+            self.destroyButton.isHidden = true
+        }
+    }
 }
+

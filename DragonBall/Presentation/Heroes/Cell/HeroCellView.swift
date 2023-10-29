@@ -19,7 +19,6 @@ class HeroCellView: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         name.text = nil
         photo.image = nil
         heroDescription.text = nil
