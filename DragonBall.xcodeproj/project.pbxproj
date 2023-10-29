@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		391491192AE6F1DE0085378E /* LocationDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391491182AE6F1DE0085378E /* LocationDAO.swift */; };
 		3914911B2AE6F34E0085378E /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3914911A2AE6F34E0085378E /* CoreDataProvider.swift */; };
+		391AECD62AEEA03400015C13 /* SecureDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391AECD52AEEA03400015C13 /* SecureDataProviderTests.swift */; };
+		391AECD82AEEA09400015C13 /* MockApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391AECD72AEEA09400015C13 /* MockApiProvider.swift */; };
+		391AECDA2AEEA27300015C13 /* ApiProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391AECD92AEEA27300015C13 /* ApiProviderTests.swift */; };
 		395D5FC12ADF02D100C34F7C /* HeroDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC02ADF02D100C34F7C /* HeroDAO.swift */; };
 		395D5FC32ADF052100C34F7C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC22ADF052100C34F7C /* CoreDataStack.swift */; };
 		395D5FC62ADF0C2C00C34F7C /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D5FC52ADF0C2C00C34F7C /* Hero.swift */; };
@@ -40,7 +43,6 @@
 		39DC25172AD71A61005416C0 /* DragonBall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25152AD71A61005416C0 /* DragonBall.xcdatamodeld */; };
 		39DC25192AD71A63005416C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39DC25182AD71A63005416C0 /* Assets.xcassets */; };
 		39DC251C2AD71A63005416C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39DC251A2AD71A63005416C0 /* LaunchScreen.storyboard */; };
-		39DC25272AD71A64005416C0 /* DragonBallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25262AD71A64005416C0 /* DragonBallTests.swift */; };
 		39DC25312AD71A64005416C0 /* DragonBallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25302AD71A64005416C0 /* DragonBallUITests.swift */; };
 		39DC25332AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25322AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift */; };
 		39DC25472AD725F7005416C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC25462AD725F7005416C0 /* LoginViewModel.swift */; };
@@ -66,6 +68,9 @@
 /* Begin PBXFileReference section */
 		391491182AE6F1DE0085378E /* LocationDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDAO.swift; sourceTree = "<group>"; };
 		3914911A2AE6F34E0085378E /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
+		391AECD52AEEA03400015C13 /* SecureDataProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataProviderTests.swift; sourceTree = "<group>"; };
+		391AECD72AEEA09400015C13 /* MockApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiProvider.swift; sourceTree = "<group>"; };
+		391AECD92AEEA27300015C13 /* ApiProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProviderTests.swift; sourceTree = "<group>"; };
 		395D5FC02ADF02D100C34F7C /* HeroDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDAO.swift; sourceTree = "<group>"; };
 		395D5FC22ADF052100C34F7C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		395D5FC52ADF0C2C00C34F7C /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
@@ -98,7 +103,6 @@
 		39DC251B2AD71A63005416C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39DC251D2AD71A63005416C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39DC25222AD71A64005416C0 /* DragonBallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonBallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		39DC25262AD71A64005416C0 /* DragonBallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallTests.swift; sourceTree = "<group>"; };
 		39DC252C2AD71A64005416C0 /* DragonBallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DragonBallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DC25302AD71A64005416C0 /* DragonBallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallUITests.swift; sourceTree = "<group>"; };
 		39DC25322AD71A64005416C0 /* DragonBallUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -132,6 +136,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		391AECD42AEE9FB700015C13 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				391AECD72AEEA09400015C13 /* MockApiProvider.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		395D5FBF2ADF02BE00C34F7C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,7 +275,9 @@
 		39DC25252AD71A64005416C0 /* DragonBallTests */ = {
 			isa = PBXGroup;
 			children = (
-				39DC25262AD71A64005416C0 /* DragonBallTests.swift */,
+				391AECD42AEE9FB700015C13 /* Mocks */,
+				391AECD52AEEA03400015C13 /* SecureDataProviderTests.swift */,
+				391AECD92AEEA27300015C13 /* ApiProviderTests.swift */,
 			);
 			path = DragonBallTests;
 			sourceTree = "<group>";
@@ -520,7 +534,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39DC25272AD71A64005416C0 /* DragonBallTests.swift in Sources */,
+				391AECD62AEEA03400015C13 /* SecureDataProviderTests.swift in Sources */,
+				391AECD82AEEA09400015C13 /* MockApiProvider.swift in Sources */,
+				391AECDA2AEEA27300015C13 /* ApiProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
