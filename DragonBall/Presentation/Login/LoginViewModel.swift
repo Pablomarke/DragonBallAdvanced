@@ -32,7 +32,7 @@ class LoginViewModel: LoginViewControllerDelegate {
         self.secureDataProvider = secureDataProvider
         self.coreDataProvider = coreDataProvider
         
-        //Esto se hace así para usarlo de ejemplo de observer
+        ///Esto se hace así para usarlo de ejemplo de observer
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onLoginResponse),
@@ -69,11 +69,12 @@ class LoginViewModel: LoginViewControllerDelegate {
         }
     }
     
+    // MARK: - Private functions -
     @objc func onLoginResponse (_ notification: Notification) {
         defer { viewState?(.loading(false)) }
-        //parsear resultado que vendrá en notification.userInfo
+        ///parsear resultado que vendrá en notification.userInfo
         guard let token = notification.userInfo?[NotificationCenter.tokenKey] as? String,
-        !token.isEmpty else {
+              !token.isEmpty else {
             return
         }
         

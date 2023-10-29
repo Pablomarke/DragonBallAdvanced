@@ -19,12 +19,13 @@ enum MapViewState {
 }
 
 class MapHeroesController: UIViewController {
-    
+
     var viewModel: MapHeroesControllerDelegate?
     
+// MARK: - IBOutlet -
     @IBOutlet weak var heroesMap: MKMapView!
     
-    // MARK: - Lifecycle -
+// MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
@@ -39,7 +40,7 @@ class MapHeroesController: UIViewController {
         navigationController?.navigationBar.tintColor = .orange
         navigationItem.title = "Mapa Heroes"
     }
-    
+// MARK: - Public functions -
     private func initViews() {
         heroesMap.delegate = self
     }
@@ -65,6 +66,7 @@ class MapHeroesController: UIViewController {
     }
 }
 
+// MARK: - Mapdelegate -
 extension MapHeroesController: MKMapViewDelegate {
     
 }

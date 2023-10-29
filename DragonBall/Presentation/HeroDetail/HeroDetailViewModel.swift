@@ -14,7 +14,8 @@ class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
     private var hero: HeroDAO
     private var heroLocations: [LocationDAO]
     private var heroAnnotation: [HeroAnnotation] = []
-    
+
+// MARK: - Initializers -
     init(hero: HeroDAO,
          heroLocations: [LocationDAO],
          coreDataProvider: CoreDataProvider
@@ -23,13 +24,13 @@ class HeroDetailViewModel: HeroesDetailViewControllerDelegate {
         self.hero = hero
         self.heroLocations = heroLocations
     }
-    
+ 
+// MARK: - Public functions -
     func onViewAppear() {
         viewState?(.loading(true))
         DispatchQueue.global().async {
             defer {self.viewState?(.loading(false))}
             self.loadLocations()
-
         }
     }
     

@@ -14,6 +14,7 @@ protocol SplashViewControllerDelegate {
     func onViewAppear()
 }
 
+// MARK: - View State -
 enum SplashViewState {
     case loading(_ isLoading: Bool)
     case navigateToLogin
@@ -21,12 +22,13 @@ enum SplashViewState {
 }
 
 class SplashViewController: UIViewController {
-    
+// MARK: - IBOutlet -
     @IBOutlet weak var splashImage: UIImageView!
     @IBOutlet weak var splashActivity: UIActivityIndicatorView!
     
     var viewModel: SplashViewControllerDelegate?
     
+// MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         setObservers()
@@ -40,6 +42,7 @@ class SplashViewController: UIViewController {
                                                      animated: animated)
     }
     
+// MARK: - Segues -
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
             case "SPLASH_TO_LOGIN":
@@ -54,6 +57,7 @@ class SplashViewController: UIViewController {
         }
     }
     
+// MARK: - Private functions -
     private func setObservers(){
         viewModel?.viewState = { [weak self] state in
             DispatchQueue.main.async {

@@ -9,13 +9,12 @@ import CoreData
 import UIKit
 
 class HeroesViewModel: HeroesViewControllerDelegate {
-    
-    // MARK: - Dependencies -
+// MARK: - Dependencies -
     private let apiProvider: ApiProviderProtocol
     private let secureDataProvider: SecureDataProviderProtocol
     private let coreDataProvider: CoreDataProvider
     
-    // MARK: - Properties -
+// MARK: - Properties -
     var viewState: ((HeroesViewState) -> Void)?
     var heroesCount: Int {
         heroes.count
@@ -23,7 +22,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     private var heroes: [HeroDAO] = []
     private var heroesLocations: [LocationDAO] = []
     
-    // MARK: - Initializers -
+// MARK: - Initializers -
     init(apiProvider: ApiProviderProtocol, 
          secureDataProvider: SecureDataProviderProtocol,
          coreDataProvider: CoreDataProvider
@@ -33,7 +32,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         self.coreDataProvider = coreDataProvider
     }
     
-    // MARK: - Public functions -
+// MARK: - Public functions -
     func onViewappear() {
         viewState?(.loading(true))
         DispatchQueue.main.async {
@@ -69,6 +68,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
     }
     
     func callLocalHeroes() {
+        self.coreDataProvider.deleteBug()
         self.heroes = self.coreDataProvider.loadHeroes()
         self.viewState?(.updateData)
     }
@@ -83,6 +83,7 @@ class HeroesViewModel: HeroesViewControllerDelegate {
         self.apiProvider.getHeroes(by: nil,
                                    token: token) { heroes in
             self.coreDataProvider.createHeroes(heroes: heroes)
+            self.coreDataProvider.deleteBug()
             self.heroes = self.coreDataProvider.loadHeroes()
             self.viewState?(.updateData)
         }

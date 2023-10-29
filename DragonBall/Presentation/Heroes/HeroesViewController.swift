@@ -52,7 +52,7 @@ class HeroesViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true,
                                                      animated: animated)
     }
-    
+    // MARK: - Segues -
     override func prepare(for segue: UIStoryboardSegue,
                           sender: Any?) {
         switch segue.identifier {
@@ -83,7 +83,7 @@ class HeroesViewController: UIViewController {
                 break
         }
     }
-        
+    
     // MARK: - Private functions -
     private func initViews() {
         tableHeroes.dataSource = self
@@ -101,23 +101,23 @@ class HeroesViewController: UIViewController {
                 switch state {
                     case .loading(let isLoading):
                         self?.loadingView.isHidden = !isLoading
-
+                        
                     case .updateData:
                         self?.tableHeroes.reloadData()
                         self?.viewModel?.whereIsTheHeroes()
                         
                     case .navigateToMap:
                         self?.performSegue(withIdentifier: "HEROES_TO_MAPHEROES",
-                                     sender: nil)
+                                           sender: nil)
                         
                     case .logoutAndExit:
                         self?.performSegue(withIdentifier: "HEROES_TO_LOGIN",
-                                     sender: nil)
-                    
+                                           sender: nil)
+                        
                         
                     case .navigateToDetail(index: let index):
                         self?.performSegue(withIdentifier: "HEROES_TO_DETAIL",
-                                     sender: index)
+                                           sender: index)
                 }
             }
         }
@@ -142,7 +142,7 @@ class HeroesViewController: UIViewController {
 
 // MARK: - Table View Data Source y Delegate-
 extension HeroesViewController: UITableViewDelegate,
-                                    UITableViewDataSource {
+                                UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int

@@ -14,7 +14,7 @@ protocol HeroesDetailViewControllerDelegate {
     func onViewAppear()
 }
 
-// Mark: - View State -
+// MARK: - View State -
 enum HeroDetailViewState {
     case loading(_ isLoading: Bool)
     case update(hero: HeroDAO?, locations: [HeroAnnotation])
@@ -22,7 +22,7 @@ enum HeroDetailViewState {
 
 class HeroDetailViewController: UIViewController {
     
-    // MARK: - IBOutlet -
+// MARK: - IBOutlet -
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,10 +30,10 @@ class HeroDetailViewController: UIViewController {
     @IBOutlet weak var detailLoadView: UIView!
     @IBOutlet weak var labelLoadView: UILabel!
     
-    // MARK - Public properties -
+// MARK - Public properties -
     var viewModel: HeroesDetailViewControllerDelegate?
     
-    // MARK: - lifecycle -
+// MARK: - lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -43,7 +43,7 @@ class HeroDetailViewController: UIViewController {
         
     }
     
-    // MARK: - Private Functions -
+// MARK: - Private Functions -
     private func initViews() {
         mapView.delegate = self
         

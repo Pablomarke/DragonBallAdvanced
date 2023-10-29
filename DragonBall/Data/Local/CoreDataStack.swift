@@ -8,13 +8,11 @@
 import Foundation
 import CoreData
 
-
-
 // MARK: - Core Data stack
 class CoreDataStack: NSObject {
     static let shared: CoreDataStack = .init()
     private override init() {}
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DragonBall")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -25,7 +23,7 @@ class CoreDataStack: NSObject {
         return container
     }()
     
-// MARK: - Core Data Saving support
+    // MARK: - Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

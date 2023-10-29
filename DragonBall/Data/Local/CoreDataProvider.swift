@@ -17,7 +17,7 @@ class CoreDataProvider {
     var fetchHeroes: NSFetchRequest<HeroDAO> {
         NSFetchRequest<HeroDAO>(entityName: HeroDAO.entityName)
      }
-    
+    // MARK: - Functions -
     func createHeroes(heroes: Heroes) {
         guard let moc,
                 let entityHero = NSEntityDescription.entity(
@@ -26,14 +26,13 @@ class CoreDataProvider {
                 ) else { return }
         
         for hero in heroes {
-            let heroDAO = HeroDAO(entity: entityHero, 
+            let heroDAO = HeroDAO(entity: entityHero,
                                   insertInto: moc)
             heroDAO.setValue(hero.name, forKey:  "name")
             heroDAO.setValue(hero.description, forKey: "heroDescription")
             heroDAO.setValue(hero.photo, forKey: "photo" )
             heroDAO.setValue(hero.id, forKey: "id")
             heroDAO.setValue(hero.isFavorite, forKey: "favorite")
-           // heroDAO.setValue([], forKey: "locations")
             try? moc.save() /// Debería estar fuera del bucle este save, pero dejandolo aquí respeta el orden de la api.
         }
     }
@@ -64,7 +63,28 @@ class CoreDataProvider {
         return try? moc.fetch(request).first
     }
     
-// MARK: - Localizaciones -
+    func getHerowithName(name: String?) -> HeroDAO? {
+        guard let nameHero = name, let moc else { return nil}
+        let request = fetchHeroes
+        request.predicate = NSPredicate(format: "name = %@", nameHero)
+        return try? moc.fetch(request).first
+    }
+    
+    func getAllIds() -> [String] {
+        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
+        guard let moc,
+              let myHeros = try? moc.fetch(fetchHero)
+                 else { return [] }
+        var heroesIds: [String] = []
+        
+        for hero in myHeros {
+            let myHeroId = hero.id ?? ""
+            heroesIds.append(myHeroId)
+        }
+        return heroesIds
+    }
+    
+// MARK: - Functions de Localizaciones -
     func createLocations(locations: HeroLocations)  {
         guard let moc,
               let entityLocation = NSEntityDescription.entity(
@@ -109,20 +129,6 @@ class CoreDataProvider {
         return myLocations.count
     }
     
-    func getAllIds() -> [String] {
-        let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
-        guard let moc,
-              let myHeros = try? moc.fetch(fetchHero)
-                 else { return [] }
-        var heroesIds: [String] = []
-        
-        for hero in myHeros {
-            let myHeroId = hero.id ?? ""
-            heroesIds.append(myHeroId)
-        }
-        return heroesIds
-    }
-    
     // MARK: - Funciones de Borrado -
     func deleteHeroes() {
         let fetchHero = NSFetchRequest<HeroDAO>(entityName: "HeroDAO")
@@ -146,5 +152,15 @@ class CoreDataProvider {
         myLocations.forEach { moc.delete($0)}
         try? moc.save()
         print("Localizaciones en base de datos despues del borrado: \(myLocations.count )")
+    }
+    
+    func deleteBug(){
+        guard let moc,
+              let bug = getHerowithName(name: "Quake (Daisy Johnson)")
+        else {
+            return
+        }
+        moc.delete(bug)
+        try? moc.save()
     }
 }

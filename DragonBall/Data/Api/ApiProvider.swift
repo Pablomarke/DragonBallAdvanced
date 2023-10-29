@@ -11,7 +11,7 @@ extension NotificationCenter {
     static let apiLoginNotification = Notification.Name("NOTIFICATION_API_LOGIN")
     static let tokenKey = Notification.Name("KEY_TOKEN")
 }
-
+// MARK: - ApiProvider Protocol -
 protocol ApiProviderProtocol {
     func login(for user: String, with password: String)
     func getHeroes(by name: String?, token: String, completion: ((Heroes) -> Void)?)
@@ -19,13 +19,15 @@ protocol ApiProviderProtocol {
 }
 
 class ApiProvider: ApiProviderProtocol {
+    // MARK - Public properties -
     static private let apiBaseURL = "https://dragonball.keepcoding.education/api"
     private enum Endpoint {
         static let login = "/auth/login"
         static let heroes = "/heros/all"
         static let heroLocations = "/heros/locations/"
     }
-    // MARK: - ApiProviderProtocol -
+    
+    // MARK: - ApiProvider Functions -
     func login(for user: String, with password: String) {
         guard let url = URL(string: "\(ApiProvider.apiBaseURL)\(Endpoint.login)") else {
             return
@@ -89,7 +91,7 @@ class ApiProvider: ApiProviderProtocol {
             
             guard let data,
                   (response as? HTTPURLResponse)?.statusCode == 200 else {
-                // TODO: enviar notificación indicando respose error
+                // TODO: enviar notificación indicando response error
                 completion?([])
                 return
             }
@@ -98,7 +100,6 @@ class ApiProvider: ApiProviderProtocol {
                 completion?([])
                 return
             }
-            
             completion?(heroes)
         }.resume()
     }
@@ -128,7 +129,7 @@ class ApiProvider: ApiProviderProtocol {
             
             guard let data,
                   (response as? HTTPURLResponse)?.statusCode == 200 else {
-                // TODO: enviar notificación indicando respose error
+                // TODO: enviar notificación indicando response error
                 completion?([])
                 return
             }
@@ -137,7 +138,6 @@ class ApiProvider: ApiProviderProtocol {
                 completion?([])
                 return
             }
-            
             completion?(heroLocations)
         }.resume()
     }

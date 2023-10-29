@@ -6,14 +6,14 @@
 //
 
 import UIKit
-
+// MARK: - Protocol -
 protocol LoginViewControllerDelegate {
     var viewState: ((LoginViewState) -> Void)? { get set}
     var heroesViewModel: HeroesViewControllerDelegate { get }
     func onloginPressed(email: String?, password: String?)
 }
 
-// Mark: - View State -
+// MARK: - View State -
 enum LoginViewState {
     case loading (_ isLoading: Bool)
     case showErrorEmail(_ error: String?)
@@ -22,23 +22,23 @@ enum LoginViewState {
 }
 
 class LoginViewController: UIViewController {
-    // MARK: - IBOutlet -
+// MARK: - IBOutlet -
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var emailFieldError: UILabel!
     @IBOutlet weak var passwordFieldError: UILabel!
     @IBOutlet weak var activityView: UIView!
     
-    // MARK: - IBAction -
+// MARK: - IBAction -
     @IBAction func onLoginPressed(){
-        // Obtener el mail y password introducidos por el usuario
-        // y enviarlos al servicion del API del Login
+        /// Obtener el mail y password introducidos por el usuario
+       /// y enviarlos al servicion del API del Login
         viewModel?.onloginPressed(
             email: emailField.text,
             password: passwordField.text)
     }
     
-    // MARK - Public properties -
+// MARK - Public properties -
     var viewModel: LoginViewControllerDelegate?
     
     private enum FieldType: Int {
@@ -46,13 +46,14 @@ class LoginViewController: UIViewController {
         case password
     }
     
-    // MARK: - lifecycle -
+// MARK: - lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
         setObservers()
     }
-    
+  
+// MARK: - Segues -
     override func prepare(
         for segue: UIStoryboardSegue,
         sender: Any?
@@ -64,7 +65,7 @@ class LoginViewController: UIViewController {
         heroesViewController.viewModel = viewModel?.heroesViewModel
     }
 
-    // MARK: - Private Functions -
+// MARK: - Private Functions -
     private func initViews() {
         emailField.delegate = self
         emailField.tag = FieldType.email.rawValue
@@ -108,6 +109,7 @@ class LoginViewController: UIViewController {
     }
 }
 
+// MARK: - TextFieldDelegate -
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch FieldType(rawValue: textField.tag) {

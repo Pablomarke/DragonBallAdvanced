@@ -8,13 +8,17 @@
 import Foundation
 
 class MapHeroesViewModel: MapHeroesControllerDelegate {
+    
+// MARK: - Dependencies -
     private let coreDataProvider: CoreDataProvider
     
+// MARK: - Properties -
     var viewState: ((MapViewState) -> Void)?
     private var mapHeroLocations: [LocationDAO]
     private var heroes: [HeroDAO]
     private var mapAnnotations: [HeroAnnotation] = []
     
+// MARK: - Init -
     init(heroes: [HeroDAO],
          mapHeroLocations: [LocationDAO] ,
          coreDataProvider: CoreDataProvider
@@ -23,7 +27,8 @@ class MapHeroesViewModel: MapHeroesControllerDelegate {
         self.heroes = heroes
         self.mapHeroLocations = mapHeroLocations
     }
-    
+   
+// MARK: - Public functions -
     func onViewappear() {
         viewState?(.loading(true))
         
